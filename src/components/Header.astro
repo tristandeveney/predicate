@@ -41,10 +41,14 @@ import predicateLogo from "../assets/logo_white.svg";
     const navToggle = document.querySelector(".mobile-nav-toggle");
     const mainNav = document.querySelector(".nav-right");
 
-    navToggle.addEventListener("click", () => {
-        const isVisible = mainNav.getAttribute("data-visible") === "true";
+    // Add this 'if' check to ensure the elements were found
+    if (navToggle && mainNav) {
+        navToggle.addEventListener("click", () => {
+            const isVisible = mainNav.getAttribute("data-visible") === "true";
 
-        mainNav.setAttribute("data-visible", !isVisible);
-        navToggle.setAttribute("aria-expanded", !isVisible);
-    });
+            // Convert the boolean to a string for setAttribute
+            mainNav.setAttribute("data-visible", String(!isVisible));
+            navToggle.setAttribute("aria-expanded", String(!isVisible));
+        });
+    }
 </script>
