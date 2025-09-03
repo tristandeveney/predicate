@@ -1,0 +1,112 @@
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
+></script>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-text fade-in">
+        <h2>Start the Conversation</h2>
+        <p>Ready to get started with a Slate project, training, or support?</p>
+        <p>
+          Fill out the form to request a complimentary 30-minute call to discuss
+          your needs and whether we might be the right fit.
+        </p><p>
+          You can also reach us directly at <strong
+            ><a href="mailto:info@predicatehighered.com"
+              >info@predicatehighered.com</a
+            ></strong
+          >.
+        </p>
+      </div>
+      <div class="form-container fade-in">
+        <form id="contact-form" novalidate>
+          <div id="response-message" class="response-message" role="alert">
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="first_name">First Name</label>
+              <input type="text" id="first_name" name="first_name" required />
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input type="text" id="last_name" name="last_name" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" />
+          </div>
+
+          <div class="form-group">
+            <label for="institution">Institution</label>
+            <input type="text" id="institution" name="institution" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <div class="cf-turnstile" data-sitekey="PASTE_YOUR_SITE_KEY_HERE">
+          </div>
+
+          <button type="submit" id="submit-button" class="btn btn-primary">
+            SUBMIT
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const responseMessage = document.getElementById(
+    "response-message",
+  ) as HTMLDivElement;
+  const submitButton = document.getElementById(
+    "submit-button",
+  ) as HTMLButtonElement;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const originalButtonText = submitButton.textContent;
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
+    responseMessage.style.display = "none";
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      responseMessage.textContent = result.message;
+
+      if (response.ok) {
+        responseMessage.className = "response-message success";
+        form.reset();
+      } else {
+        responseMessage.className = "response-message error";
+      }
+    } catch (error) {
+      responseMessage.textContent =
+        "A network error occurred. Please check your connection and try again.";
+      responseMessage.className = "response-message error";
+    } finally {
+      responseMessage.style.display = "block";
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+    }
+  });
+</script>

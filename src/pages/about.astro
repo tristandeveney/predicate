@@ -1,0 +1,270 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import { Image } from "astro:assets";
+import headshotImage from "../assets/tdeveney_headshot_500.jpg";
+import slateCertifiedBadge from "../assets/slate_certified.png";
+---
+
+<style is:global>
+    @import "../styles/global.css";
+</style>
+
+<Layout
+    title="Slate Consulting and Support | Predicate Higher Ed"
+    description="Predicate Higher Ed helps lean Slate teams save time, supplement their in-house capabilities, and build confidence in the accuracy of their data–all to better serve students. "
+>
+    <Header />
+    <main>
+        <section class="page-hero fade-in">
+            <div class="narrow-container">
+                <h1>Are We a Fit?</h1>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="narrow-container">
+                <div class="article-content">
+                    <h2>Who We Help</h2>
+
+                    <h3>Sound familiar?</h3>
+                    <ul>
+                        <li>
+                            <strong>You inherited your instance</strong> after the
+                            original implementation team moved on, or after ITS was
+                            asked to play a bigger role in supporting admissions
+                            technology.
+                        </li>
+                        <li>
+                            <strong>You joined an existing instance</strong> as part
+                            of a school or division that wasn't part of your institution's
+                            initial implementation, and you're still getting your
+                            bearings.
+                        </li>
+                        <li>
+                            <strong
+                                >You're just completing an implementation</strong
+                            > and you feel like there are still significant gaps,
+                            after so much effort to migrate core processes ahead
+                            of critical deadlines.
+                        </li>
+                        <li>
+                            <strong
+                                >You're a long-time Slate captain or power user</strong
+                            > with growing responsibilities—and you can't be everywhere.
+                        </li>
+                    </ul>
+                    <p>
+                        If you're reading this, there's a good chance that you
+                        have big ideas for what Slate could do for your
+                        institution—how processes could be streamlined, how
+                        better data could answer new questions—but you don't
+                        have many spare afternoons these days to dig through
+                        documentation or tinker in a test environment.
+                    </p>
+
+                    <p>
+                        You're looking to save time, get solutions in place,
+                        grow capacity and skills on your team, and build a solid
+                        foundation for this next phase of your Slate instance.
+                    </p>
+                    <h2>What We Believe</h2>
+                    <h3>Slate consulting should be a partnership.</h3>
+                    <p>
+                        Working with a consultant should be about building a
+                        partership with someone who supplements the capabilities
+                        of your team, getting you over the immediate technical
+                        challenges while also ensuring your team has the
+                        attention they need to develop more advanced skills
+                        themselves and grow professionally.
+                    </p>
+                    <p>
+                        With a tool like Slate, where there's always more than
+                        one way to accomplish something, it's important to work
+                        with someone who's deeply embedded in the community and
+                        understands Slate from the ground up: someone who can
+                        speak to the best practices and their exceptions, and
+                        who can help you benchmark your practices against those
+                        of your peers.
+                    </p>
+
+                    <p>
+                        Critically, a great Slate consultant should be
+                        comfortable advising you that just because something <em
+                            >can</em
+                        > be done in Slate, that doesn't mean it <em>should</em>
+                        be done in Slate. A great Slate consulting partnership creates
+                        the kind of professional space where advice like that can
+                        be shared candidly and objectively, and also where teams
+                        feel safe and supported to ask their questions free of judgement.
+                    </p>
+                    <h2>What we do (and what we don't)</h2>
+                    <ul>
+                        <li>
+                            <strong>Just Slate.</strong> We can offer referrals for
+                            other firms if you're looking for marketing services,
+                            enrollment strategy, or support for other campus technologies,
+                            but we think Slate consulting is most effective when
+                            it's the sole focus.
+                        </li>
+                        <li>
+                            <strong
+                                >Supplement your team, not fill a gap in
+                                staffing.</strong
+                            >
+                            We work with teams who need help getting over a particular
+                            technical hurdle or who need a resource to offer guidance
+                            on using Slate effectively. We can help you assess the
+                            skills of a potential contractor if you're looking for
+                            short-term staff augmentation or part-time/fractional
+                            Slate captain services instead.
+                        </li>
+                        <li>
+                            <strong
+                                >Offer attention, high availability, and direct
+                                access to expertise.</strong
+                            > Think of it like providing the Slate equivalent of
+                            a (virtual) house call with an experienced general practitioner
+                            whom you know and trust. If scaled triage services or
+                            a broader network of experts in other specialities would
+                            be a better fit, again, we're happy to make a referral
+                            or help you explore your options.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section id="founder-bio">
+        <div class="container">
+            <div class="centered-heading fade-in">
+                <div class="heading-group">
+                    <h2>About Tristan</h2>
+                </div>
+            </div>
+            <div class="about-content">
+                <div class="about-image-wrapper fade-in">
+                    <Image
+                        src={headshotImage}
+                        alt="Headshot of Tristan Deveney, Founder of Predicate Higher Ed"
+                        width={500}
+                        height={500}
+                    />
+                    <Image
+                        src={slateCertifiedBadge}
+                        alt="Slate Certified Badge"
+                        class="slate-badge"
+                        width={120}
+                        height={120}
+                    />
+                </div>
+                <div class="about-text fade-in">
+                    <h3>Tristan Deveney</h3>
+                    <h4>Founder and Principal Slate Consultant</h4>
+
+                    <p class="education-history">
+                        M.Phil. English, University of Cambridge<br />
+                        B.A. English, Dickinson College
+                    </p>
+                    <p>
+                        Tristan Deveney is the founder and Principal Slate
+                        Consultant at Predicate Higher Ed. He started working
+                        with Slate in 2012, first on the institutional side as a
+                        Slate administrator at Clark University, before joining
+                        Technolutions as a Senior Program Manager and Client
+                        Support Engineer.
+                    </p>
+                    <p>
+                        While at Technolutions, he served as the Data Team Lead,
+                        developing Configurable Joins documentation and training
+                        sources, and piloting the Community Conversations
+                        series. In addition to querying, reporting, and custom
+                        SQL, he specialized in portals, permissions, and
+                        Reader/Workflows.
+                    </p>
+                    <p>
+                        Tristan has been a Slate consultant since 2023, starting
+                        as the first developer hired at FGI Consultants, a
+                        platinum preferred partner, where he led the Solutions
+                        Engineering team. He served as Solution Architect
+                        through the completion of FGI’s acquisition by Kennedy &
+                        Co.
+                    </p>
+                    <p>
+                        In 2025, he decided to leave to launch Predicate Higher
+                        Ed LLC as a Slate consulting practice focused on helping
+                        teams use Slate to its full potential. Tristan leads a
+                        wide variety of projects for the firm, including
+                        advanced troubleshooting as part of support retainers,
+                        custom reporting and dashboard design, portal
+                        development, and branding updates.
+                    </p>
+                    <p>
+                        He earned the Slate Certified Professional qualification
+                        in 2025 as part of the first cohort of Slate Certified
+                        by Technolutions.
+                    </p>
+                    <div class="presentations-block">
+                        <h3 class="presentations-title">
+                            Selected Summit Presentations and Webinars
+                        </h3>
+                        <ul class="presentation-list">
+                            <li>
+                                <strong
+                                    >Prioritizing Legacy Queries for Migration
+                                    to Configurable Joins</strong
+                                ><br /> Dive Deeper Webinar Hosted by Technolutions,
+                                Fall 2024
+                            </li>
+                            <li>
+                                <strong
+                                    >Match Point(ers): Portals for Criteria- and
+                                    Score-Based Matching</strong
+                                ><br /> Slate Summit 2024, Chicago
+                            </li>
+                            <li>
+                                <strong
+                                    >Addressing Technical Debt in Mature
+                                    Instances</strong
+                                >
+                                <br />Dive Deeper Webinar Hosted by
+                                Technolutions, Spring 2024
+                            </li>
+                            <li>
+                                <strong
+                                    >Breaking the Mold: How Consultant
+                                    Partnerships Can Expand Slate's Reach
+                                    Outside Higher Ed</strong
+                                >
+                                <br />Slate Summit 2023, Nashville
+                            </li>
+                            <li>
+                                <strong
+                                    >Adding Context to Reader Dashboard Portals</strong
+                                >
+                                <br />
+                                Slate Stage, Spring 2023 Virtual Summit Pre-Conference
+                            </li>
+                            <li>
+                                <strong
+                                    >Make it Work(flow): When to Use a Workflow
+                                    in Your Review Process</strong
+                                ><br />
+                                Slate Interactive, Summit 2019, Chicago
+                            </li>
+                            <li>
+                                <strong>Travel Planning and Voyager</strong>
+                                <br />Base Camp, Summit 2019, Chicago
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <Contact />
+</Layout>
+<Footer />

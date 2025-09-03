@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import headshotImage from "../assets/tdeveney_headshot_500.jpg";
+import slateCertifiedBadge from "../assets/slate_certified.png";
+---
+
+<section id="about">
+    <div class="container">
+        <div class="centered-heading fade-in">
+            <div class="heading-group">
+                <h2>Direct access to expertise, when you need it.</h2>
+            </div>
+        </div>
+        <div class="about-content">
+            <div class="about-image-wrapper fade-in">
+                <Image
+                    src={headshotImage}
+                    alt="Headshot of Tristan Deveney, Founder of Predicate Higher Ed"
+                    width={500}
+                    height={500}
+                />
+                <Image
+                    src={slateCertifiedBadge}
+                    alt="Slate Certified Badge"
+                    class="slate-badge"
+                    width={120}
+                    height={120}
+                />
+            </div>
+            <div class="about-text fade-in">
+                <blockquote class="founder-quote">
+                    <p>
+                        "One of my goals in launching Predicate Higher Ed was to
+                        provide Slate support that felt truly accessible and
+                        personal. I'm prioritizing making <strong
+                            >same-day or next-day scheduling</strong
+                        > a reality for clients, because I know teams benefit when
+                        they feel they have reliable, consistent access to a dedicated
+                        partner. Sometimes you just need someone who can jump on
+                        a screenshare with you, and I'm committed to providing that
+                        level of service."
+                    </p>
+                </blockquote>
+                <h3>Tristan Deveney</h3>
+                <h4>Founder and Principal Slate Consultant</h4>
+                <a href="/about" class="btn btn-primary">ARE WE A FIT?</a>
+            </div>
+        </div>
+    </div>
+</section>
