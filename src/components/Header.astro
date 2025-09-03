@@ -7,18 +7,44 @@ import predicateLogo from "../assets/logo_white.svg";
     <div class="container">
         <nav class="main-nav">
             <a href="/" class="logo">
-                <Image src={predicateLogo} width={350} alt="Predicate Higher Ed Logo" />
+                <Image
+                    src={predicateLogo}
+                    width={350}
+                    height={77}
+                    alt="Predicate Higher Ed Logo"
+                    loading="eager"
+                />
             </a>
-            <div class="nav-right">
+
+            <div class="nav-right" id="main-navigation" data-visible="false">
                 <ul class="nav-links">
                     <li><a href="/#services">Slate Services</a></li>
-
                     <li><a href="/about">Are We a Fit?</a></li>
                 </ul>
                 <div class="nav-cta">
                     <a href="#contact">Contact</a>
                 </div>
             </div>
+
+            <button
+                class="mobile-nav-toggle"
+                aria-controls="main-navigation"
+                aria-expanded="false"
+            >
+                <span class="sr-only">Menu</span>
+            </button>
         </nav>
     </div>
 </header>
+
+<script>
+    const navToggle = document.querySelector(".mobile-nav-toggle");
+    const mainNav = document.querySelector(".nav-right");
+
+    navToggle.addEventListener("click", () => {
+        const isVisible = mainNav.getAttribute("data-visible") === "true";
+
+        mainNav.setAttribute("data-visible", !isVisible);
+        navToggle.setAttribute("aria-expanded", !isVisible);
+    });
+</script>
