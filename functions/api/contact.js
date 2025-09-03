@@ -55,7 +55,7 @@ export async function onRequestPost({ request, env }) {
     `;
 
         const emailPayload = {
-            from: 'Contact Form <onboarding@resend.dev>',
+            from: 'Predicate Contact Form <contact@hello.predicatehighered.com>',
             to: ['info@predicatehighered.com'],
             subject: `New Lead from ${firstName} ${lastName}`,
             html: emailHtml,
