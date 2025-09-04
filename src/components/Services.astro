@@ -242,4 +242,41 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const accordions = document.querySelectorAll(
+                ".service-accordion-item",
+            );
+            if (accordions.length === 0) return;
+
+            const scrollMargin = parseFloat(
+                getComputedStyle(accordions[0]).scrollMarginTop,
+            );
+
+            accordions.forEach((accordion) => {
+                accordion.addEventListener("toggle", (event) => {
+                    const currentAccordion =
+                        event.currentTarget as HTMLDetailsElement;
+                    if (currentAccordion.open) {
+                        accordions.forEach((otherAccordion) => {
+                            if (otherAccordion !== currentAccordion) {
+                                otherAccordion.open = false;
+                            }
+                        });
+
+                        setTimeout(() => {
+                            const rect =
+                                currentAccordion.getBoundingClientRect();
+                            if (rect.top < scrollMargin) {
+                                currentAccordion.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start",
+                                });
+                            }
+                        }, 200);
+                    }
+                });
+            });
+        });
+    </script>
 </section>

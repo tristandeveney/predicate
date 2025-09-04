@@ -625,7 +625,9 @@ p {
     padding: 1rem 2rem;
 }
 
+
 .service-accordion-item {
+    scroll-margin-top: 10rem;
     border-bottom: 1px solid #e0e0e0;
 }
 
@@ -657,26 +659,26 @@ p {
     transition: transform 0.3s ease;
 }
 
-.service-accordion-item[open] summary::after {
+.service-accordion-item[open]>summary::after {
     content: '\2212';
 }
 
 .service-accordion-content {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.35s ease-in-out, padding-bottom 0.35s ease-in-out;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    transition: grid-template-rows 0.35s ease-in-out;
 }
 
-.service-accordion-item[open] .service-accordion-content {
+.service-accordion-item[open]>.service-accordion-content {
     grid-template-rows: 1fr;
-    padding-bottom: 1.5rem;
 }
 
 .accordion-content-wrapper {
     overflow: hidden;
-    min-height: 0;
+}
+
+.service-accordion-item[open] .accordion-content-wrapper {
+    padding-bottom: 1.5rem;
 }
 
 #services .feature-list li,
