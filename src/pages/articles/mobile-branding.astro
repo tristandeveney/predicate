@@ -1,0 +1,159 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Insights from "../../components/Insights.astro";
+import Contact from "../../components/Contact.astro";
+import Footer from "../../components/Footer.astro";
+import { Image } from "astro:assets";
+import mobile_branding_example from "../../assets/mobile_branding_example.png";
+import AuthorBlock from "../../components/AuthorBlock.astro";
+---
+
+<style is:global>
+    @import "../../styles/global.css";
+</style>
+
+<Layout
+    title="Does Your Slate Mobile Branding Display Consistently? | Predicate Higher Ed"
+    description="In a recent analysis, 1 in 10 colleges displayed a generic 'default grey' header on Slate-hosted mobile pages, creating an inconsistent user experience. Predicate Higher Ed explains the configuration setting and testing best practices to ensure your brand is consistent on every device. "
+>
+    <Header />
+    <main>
+        <section class="content-section article-page">
+            <div class="narrow-container">
+                <div class="article-header">
+                    <Image
+                        src={mobile_branding_example}
+                        alt="An example of inconsistent CRM mobile branding in Slate, showing a generic grey header instead of a university's custom branding."
+                        class="article-feature-image"
+                    />
+                </div>
+                <div class="article-content">
+                    <h1>
+                        Does Your Slate Mobile Branding Display Consistently on
+                        Every Device?
+                    </h1>
+
+                    <p class="article-meta">Published on September 8, 2025</p>
+
+                    <p>
+                        A prospective student is browsing your website on her
+                        phone, ready to request more information. She taps the
+                        link, and suddenly she's on a page with a plain grey
+                        header across the top: it has your university's name but
+                        no logo, no brand colors, just generic styling. What
+                        happened to the hamburger menu? Did she make a mistake?
+                        The form fields are right there, but it's not the brand
+                        experience she was having a moment ago. She's confused.
+                        Is this really your form?
+                    </p>
+
+                    <p>
+                        More than 1 in 10 undergraduate/shared instances of
+                        Slate have an inconsistent mobile branding experience,
+                        with Slate's 'default grey' template applied instead of
+                        the school's own custom branding.
+                    </p><p>
+                        This finding comes as part of Predicate Higher Ed's new
+                        benchmarking series examining current inquiry form
+                        practices, analyzing the RFI forms of more than 750
+                        Slate schools.
+                    </p>
+                    <h3>Why Inconsistent Branding Happens</h3>
+                    <p>
+                        When institutions configure their branding in Slate,
+                        Technolutions provides the option to enable separate,
+                        custom mobile branding via a configuration key (see the <a
+                            href="https://knowledge.technolutions.net/docs/branding-in-slate#mobile-device-branding"
+                            >Knowledge Base</a
+                        >). Custom branding is not applied automatically:
+                    </p>
+                    <blockquote>
+                        By default, the mobile branding that is implemented is
+                        using the Slate ‘default grey’ mobile template. This
+                        minimalist template ensures that Slates content is
+                        rendered consistently across all mobile platforms.
+                    </blockquote>
+                    <p>
+                        Instead, the setting for Mobile Template, available
+                        under <strong
+                            >Database &gt Configuration Keys &gt Branding,
+                            Privacy & Ping &gt Mobile Template</strong
+                        >, must be updated manually to have a specific branding
+                        file such as /shared/build.xslt applied on mobile
+                        devices.
+                    </p>
+                    <p>
+                        If no selection is made, Slate will serve the 'default
+                        grey' branding by default for mobile devices.
+                    </p>
+                    <p>
+                        Marketing and admissions teams may not realize this is
+                        happening for some prospective students if they preview
+                        their Slate forms, applications, or portals using
+                        browser developer tools on desktop, or if they test on a
+                        single device/browser where Slate determined the desktop
+                        branding should be served instead.
+                    </p>
+                    <p>
+                        In our analysis, 1 in 10 schools still had the default
+                        template appearing on at least one modern device/browser
+                        combination.
+                    </p><p>
+                        It's important to understand that checking manually on
+                        one specific device isn't enough, as Slate may determine
+                        the custom branding files can be loaded under some
+                        circumstances but not others. For example, in testing,
+                        we encountered a much higher rate of default branding
+                        being applied using Chrome or Safari on iPhones, while
+                        Firefox on android devices often loaded custom branding
+                        for the same pages.
+                    </p>
+                    <h3>Making the Updating, and Testing, Testing, Testing</h3>
+                    <p>
+                        Our recommendation is to use dedicated testing tools
+                        like Sauce Labs or BrowserStack rather than relying on a
+                        single user testing on their personal device.
+                    </p>
+                    <p>
+                        Customizing branding in Slate requires careful testing
+                        to ensure cross-browser compatibility. As Technolutions
+                        notes in their documentation, institutions' use of
+                        JavaScript for their standard mobile styling can often
+                        conflict with Slate functionality. If you encounter
+                        'Default Grey' on your Slate pages and you want to make
+                        a change, the safest approach is to apply the
+                        configuration key in your Test environment first, then
+                        complete broad testing across devices/browsers before
+                        enabling the key in production.
+                    </p>
+                    <p>
+                        While 'default grey' is a safe fallback experience that
+                        ensures prospective students are able to view and
+                        interact with your Slate pages successfully, most
+                        institutions in 2025 will want to take the opportunity
+                        to apply a custom branding experience consistently
+                        across all devices, ensuring that visitors never pause
+                        to wonder whether they left the institutional website.
+                    </p>
+                    <p>
+                        <em
+                            >Have questions about branding in Slate or looking
+                            for assistance to make your Slate forms, portals, or
+                            applications visually consistent with a new redesign
+                            of your institutional website? Contact us at <a
+                                href="mailto:info@predicatehighered.com"
+                                >info@predicatehighered.com</a
+                            > to learn how we can help.</em
+                        >
+                    </p>
+
+                    <AuthorBlock />
+                </div>
+            </div>
+        </section>
+    </main>
+    <Insights />
+    <Contact />
+</Layout>
+<Footer />

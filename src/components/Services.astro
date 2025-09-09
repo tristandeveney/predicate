@@ -56,9 +56,10 @@
                                     </div>
                                 </li>
                                 <li>
-                                    Predictable month-to-month, quarterly, or
-                                    annual retainer contracts sized to meet your
-                                    needs, starting at $1,000/month
+                                    Predictable pricing with month-to-month,
+                                    quarterly, or annual retainer contracts
+                                    sized to meet your needs, starting at
+                                    $1,000/month
                                 </li>
                             </ul>
                             <p>
@@ -260,7 +261,8 @@
                     if (currentAccordion.open) {
                         accordions.forEach((otherAccordion) => {
                             if (otherAccordion !== currentAccordion) {
-                                otherAccordion.open = false;
+                                (otherAccordion as HTMLDetailsElement).open =
+                                    false;
                             }
                         });
 

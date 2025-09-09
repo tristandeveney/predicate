@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+import headshotImage from "../assets/tdeveney_headshot_500.jpg";
+---
+
+<div class="author-block">
+    <div class="author-image">
+        <Image
+            src={headshotImage}
+            alt="Headshot of Tristan Deveney"
+            width={80}
+            height={80}
+        />
+    </div>
+    <div class="author-info">
+        <p class="author-name">Tristan Deveney</p>
+
+        <p class="author-bio">
+            Tristan is the founder and principal at Predicate Higher Ed, with
+            more than 12 years of Slate experience, both on the college side and
+            at Technolutions, where he served as the Data Team Lead.
+        </p><p class="author-bio">
+            <a href="/about#deveney-bio">View Bio →</a>
+        </p>
+    </div>
+</div>
