@@ -1,5 +1,11 @@
 ---
-const { title, description } = Astro.props;
+const { title, description, image } = Astro.props;
+
+const permalink = Astro.url.href;
+
+const ogImageUrl = image
+    ? new URL(image, Astro.site).href
+    : new URL("/logo_white_public.svg", Astro.site).href;
 ---
 
 <!doctype html>
@@ -9,6 +15,12 @@ const { title, description } = Astro.props;
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title}</title>
         <meta name="description" content={description} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={permalink} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImageUrl} />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
