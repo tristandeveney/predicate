@@ -706,6 +706,22 @@ p {
     content: none;
 }
 
+#services a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--color-text-light);
+    transition: color 0.2s ease;
+}
+
+#services a:visited {
+    color: var(--color-secondary);
+    border-bottom-style: solid;
+}
+
+#services a:hover {
+    color: var(--color-secondary);
+}
+
 #approach-cta {
     background-color: var(--color-primary);
 }
