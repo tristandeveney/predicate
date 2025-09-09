@@ -45,9 +45,13 @@ const { title, description } = Astro.props;
         <script>
             const header = document.querySelector(".main-header");
             if (header) {
-                window.addEventListener("scroll", () => {
+                const handleScroll = () => {
                     header.classList.toggle("scrolled", window.scrollY > 50);
-                });
+                };
+
+                document.addEventListener("DOMContentLoaded", handleScroll);
+
+                window.addEventListener("scroll", handleScroll);
             }
 
             const faders = document.querySelectorAll(".fade-in");
@@ -71,7 +75,7 @@ const { title, description } = Astro.props;
                 appearOnScroll.observe(fader);
             });
 
-            const accordions = document.querySelectorAll(
+            const accordions = document.querySelectorAll<HTMLDetailsElement>(
                 ".services-accordion .service-accordion-item",
             );
             accordions.forEach((accordion) => {
