@@ -41,37 +41,6 @@ const { title, description } = Astro.props;
     </head>
     <body>
         <slot />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Source+Sans+3:wght@400;600&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap"
-            rel="stylesheet"
-        />
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                "name": "Predicate Higher Ed",
-                "url": "https://www.predicatehighered.com/",
-                "logo": "https://www.predicatehighered.com/_astro/logo_white.0tC1RDH9_K0wOo.svg",
-                "contactPoint": {
-                    "@type": "ContactPoint",
-                    "email": "info@predicatehighered.com",
-                    "contactType": "customer service"
-                }
-            }
-        </script>
-    </body>
-    <body>
-        <slot />
 
         <script>
             const header = document.querySelector(".main-header");
@@ -81,7 +50,6 @@ const { title, description } = Astro.props;
                 });
             }
 
-            // Fade-in Animation on Scroll
             const faders = document.querySelectorAll(".fade-in");
             const appearOptions = {
                 threshold: 0.1,
@@ -103,7 +71,7 @@ const { title, description } = Astro.props;
                 appearOnScroll.observe(fader);
             });
 
-            const accordions = document.querySelectorAll<HTMLDetailsElement>(
+            const accordions = document.querySelectorAll(
                 ".services-accordion .service-accordion-item",
             );
             accordions.forEach((accordion) => {
