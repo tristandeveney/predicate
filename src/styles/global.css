@@ -717,12 +717,21 @@ p {
     align-items: center;
 }
 
-#approach-cta h1 {
+#approach-cta #definition-word {
     font-family: var(--font-logo);
     color: var(--color-text-on-dark);
     font-weight: 400;
     text-align: right;
     margin: 0;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+}
+
+
+@media (max-width: 768px) {
+    #definition-word {
+        font-size: 3rem;
+    }
+
 }
 
 #approach-cta h2 {
@@ -1248,7 +1257,7 @@ a[href^="mailto:"]:hover {
         gap: 1rem;
     }
 
-    #approach-cta h1 {
+    #definition-word {
         text-align: center;
         margin-bottom: 1rem;
     }
