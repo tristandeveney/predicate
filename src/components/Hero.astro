@@ -2,24 +2,111 @@
     <div class="container">
         <div class="hero-grid">
             <div class="hero-text">
-                <h1 class="fade-in">Helping lean teams get the most out of Slate</h1>
+                <h1 class="fade-in">
+                    Helping lean teams get the most out of Slate
+                </h1>
                 <p class="subheadline fade-in">
-                    <strong>Predicate Higher Ed</strong> helps lean Slate teams save time, supplement their in-house capabilities, and build confidence in the accuracy of their data–all to better serve students.
+                    <strong>Predicate Higher Ed</strong> helps lean Slate teams save
+                    time, supplement their in-house capabilities, and build confidence
+                    in the accuracy of their data–all to better serve students.
                 </p>
-                <a href="#contact" class="btn btn-light fade-in">START THE CONVERSATION</a>
+                <a href="#contact" class="btn btn-light fade-in"
+                    >START THE CONVERSATION</a
+                >
             </div>
             <div class="hero-visual fade-in">
-                <svg class="hero-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                    <line class="line-1" x1="50" y1="200" x2="150" y2="100" stroke="#0A2540" stroke-width="2" />
-                    <line class="line-2" x1="150" y1="100" x2="250" y2="150" stroke="#0A2540" stroke-width="2" />
-                    <line class="line-3" x1="250" y1="150" x2="350" y2="50" stroke="#0A2540" stroke-width="2" />
-                    <line class="line-4" x1="150" y1="100" x2="200" y2="300" stroke="#0A2540" stroke-width="2" />
-                    <line class="line-5" x1="250" y1="150" x2="200" y2="300" stroke="#0A2540" stroke-width="2" />
-                    <circle class="node-1" cx="50" cy="200" r="10" fill="#D4A056" />
-                    <circle class="node-2" cx="150" cy="100" r="15" fill="#0A2540" />
-                    <circle class="node-3" cx="250" cy="150" r="10" fill="#D4A056" />
-                    <circle class="node-4" cx="350" cy="50" r="12" fill="#0A2540" />
-                    <circle class="node-5" cx="200" cy="300" r="20" fill="#D4A056" />
+                <svg
+                    class="hero-svg"
+                    viewBox="0 0 400 300"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-labelledby="svg-title"
+                    role="img"
+                >
+                    <title id="svg-title">
+                        An animation of a Venn diagram showing the intersection
+                        of two data sets.
+                    </title>
+                    <defs>
+                        <filter id="blurry-glow">
+                            <feGaussianBlur
+                                in="SourceGraphic"
+                                stdDeviation="5"
+                                result="blur"></feGaussianBlur>
+                            <feColorMatrix
+                                in="blur"
+                                mode="matrix"
+                                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                                result="glow"></feColorMatrix>
+                            <feComposite
+                                in="SourceGraphic"
+                                in2="glow"
+                                operator="over"></feComposite>
+                        </filter>
+                        <clipPath id="intersect-clip-path">
+                            <circle cx="150" cy="150" r="100"></circle>
+                        </clipPath>
+                        <radialGradient id="data-flow-gradient">
+                            <stop
+                                offset="0%"
+                                stop-color="var(--color-secondary)"
+                                stop-opacity="1"
+                            >
+                                <animate
+                                    attributeName="offset"
+                                    from="-0.5"
+                                    to="1.5"
+                                    dur="2s"
+                                    repeatCount="indefinite"></animate>
+                            </stop>
+                            <stop
+                                offset="50%"
+                                stop-color="var(--color-secondary)"
+                                stop-opacity="0.3"
+                            >
+                                <animate
+                                    attributeName="offset"
+                                    from="0"
+                                    to="2"
+                                    dur="2s"
+                                    repeatCount="indefinite"></animate>
+                            </stop>
+                            <stop
+                                offset="100%"
+                                stop-color="var(--color-secondary)"
+                                stop-opacity="1"
+                            >
+                                <animate
+                                    attributeName="offset"
+                                    from="0.5"
+                                    to="2.5"
+                                    dur="2s"
+                                    repeatCount="indefinite"></animate>
+                            </stop>
+                        </radialGradient>
+                    </defs>
+                    <g class="venn-diagram">
+                        <circle
+                            class="venn-circle circle-a"
+                            cx="150"
+                            cy="150"
+                            r="100"></circle>
+                        <circle
+                            class="venn-circle circle-b"
+                            cx="250"
+                            cy="150"
+                            r="100"></circle>
+                        <g
+                            class="venn-intersection"
+                            clip-path="url(#intersect-clip-path)"
+                        >
+                            <circle
+                                class="intersect-fill"
+                                cx="250"
+                                cy="150"
+                                r="100"
+                                filter="url(#blurry-glow)"></circle>
+                        </g>
+                    </g>
                 </svg>
             </div>
         </div>
