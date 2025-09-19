@@ -1542,6 +1542,15 @@ a[href^="mailto:"]:hover {
     letter-spacing: 1px;
 }
 
+.attribution {
+    font-size: 0.875rem;
+    color: #555;
+    font-style: italic;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
 .author-block {
     display: flex;
     align-items: center;

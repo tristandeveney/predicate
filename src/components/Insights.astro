@@ -1,4 +1,5 @@
 ---
+import click_depth from "../assets/click_depth.png";
 import mobile_branding_example from "../assets/mobile_branding_example.png";
 ---
 
@@ -6,6 +7,26 @@ import mobile_branding_example from "../assets/mobile_branding_example.png";
     <div class="container">
         <h2 class="centered-heading fade-in">INSIGHTS & RESOURCES</h2>
         <div class="insights-grid">
+            <article
+                class="insight-card fade-in"
+                style="transition-delay: 0.2s;"
+            >
+                <div
+                    class="card-visual"
+                    style={`background-image: url('${click_depth.src}');`}
+                >
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">Article</span>
+                    <h3>
+                        <a href="/articles/click-depth">
+                            How Many Clicks to Inquire? New 2025 Data from
+                            1,200+ College Websites
+                        </a>
+                    </h3>
+                    <p class="read-more">Read More &rarr;</p>
+                </div>
+            </article>
             <article
                 class="insight-card fade-in"
                 style="transition-delay: 0.2s;"

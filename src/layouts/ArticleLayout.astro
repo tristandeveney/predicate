@@ -1,0 +1,90 @@
+---
+// src/layouts/ArticleLayout.astro
+
+import Layout from "./Layout.astro";
+import Header from "../components/Header.astro";
+import Insights from "../components/Insights.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import AuthorBlock from "../components/AuthorBlock.astro";
+import { Image } from "astro:assets";
+
+// Defines the props this layout expects from each article's frontmatter
+const { frontmatter } = Astro.props;
+const { title, description, pubDate, image, alt } = frontmatter;
+
+// Creates the absolute image URL needed for social media cards
+const absoluteImageUrl = image
+    ? new URL(image, Astro.site).href
+    : new URL("/default-social-image.png", Astro.site).href;
+---
+
+{/* Uses the main Layout, passing the article's unique props to it */}
+<Layout title={title} description={description} image={absoluteImageUrl}>
+    {
+        /* Automatically generates the unique Article schema for this specific post */
+    }
+    <script
+        type="application/ld+json"
+        slot="head-scripts"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: title,
+            description: description,
+            image: absoluteImageUrl,
+            author: {
+                "@type": "Person",
+                name: "Tristan Deveney", // This can also be a prop if you have multiple authors
+                url: new URL("/about#deveney-bio", Astro.site).href,
+            },
+            publisher: {
+                "@type": "Organization",
+                name: "Predicate Higher Ed",
+                logo: {
+                    "@type": "ImageObject",
+                    url: new URL("/assets/logo.svg", Astro.site).href, // Ensure this path is correct
+                },
+            },
+            datePublished: new Date(pubDate).toISOString(),
+        })}
+    />
+
+    <Header />
+    <main>
+        <section class="content-section article-page">
+            <div class="narrow-container">
+                <div class="article-header">
+                    <Image
+                        src={image}
+                        alt={alt ||
+                            `Feature image for the article titled: ${title}`}
+                        class="article-feature-image"
+                    />
+                </div>
+                <div class="article-content">
+                    <h1>{title}</h1>
+                    <p class="article-meta">
+                        Published on {
+                            new Date(pubDate).toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                            })
+                        }
+                    </p>
+
+                    {
+                        /* The article's main content from the Markdown file goes here */
+                    }
+                    <slot />
+
+                    <AuthorBlock />
+                </div>
+            </div>
+        </section>
+    </main>
+    <Insights />
+    <Contact />
+    <Footer />
+</Layout>

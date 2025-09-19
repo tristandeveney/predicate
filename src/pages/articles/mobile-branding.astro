@@ -7,33 +7,65 @@ import Footer from "../../components/Footer.astro";
 import { Image } from "astro:assets";
 import mobile_branding_example from "../../assets/mobile_branding_example.png";
 import AuthorBlock from "../../components/AuthorBlock.astro";
+import "../../styles/global.css";
+
+// --- Page-Specific SEO & Content Data ---
+const title =
+    "Does Your Slate Mobile Branding Display Consistently on Every Device?";
+const description =
+    "1 in 10 colleges display a 'default grey' header on Slate-hosted mobile pages. We explain the configuration and testing to ensure your brand is consistent on every device.";
+const pubDate = "2025-09-09";
+const image = mobile_branding_example;
+const alt =
+    "An example of inconsistent CRM mobile branding in Slate, showing a generic grey header instead of a university's custom branding.";
+
+const absoluteImageUrl = new URL(image.src, Astro.site).href;
 ---
 
-<style is:global>
-    @import "../../styles/global.css";
-</style>
-
 <Layout
-    title="Does Your Slate Mobile Branding Display Consistently? | Predicate Higher Ed"
-    description="In a recent analysis, 1 in 10 colleges displayed a generic 'default grey' header on Slate-hosted mobile pages, creating an inconsistent user experience. Predicate Higher Ed explains the configuration setting and testing best practices to ensure your brand is consistent on every device. "
-    image={mobile_branding_example.src}
+    title={`${title} | Predicate Higher Ed`}
+    description={description}
+    image={absoluteImageUrl}
 >
+    <script
+        type="application/ld+json"
+        slot="head-scripts"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: title,
+            description: description,
+            image: absoluteImageUrl,
+            author: {
+                "@type": "Person",
+                name: "Tristan Deveney",
+                url: new URL("/about#deveney-bio", Astro.site).href,
+            },
+            publisher: {
+                "@type": "Organization",
+                name: "Predicate Higher Ed",
+                logo: {
+                    "@type": "ImageObject",
+                    url: new URL("/assets/logo.svg", Astro.site).href,
+                },
+            },
+            datePublished: new Date(pubDate).toISOString(),
+        })}
+    />
+
     <Header />
     <main>
         <section class="content-section article-page">
             <div class="narrow-container">
                 <div class="article-header">
                     <Image
-                        src={mobile_branding_example}
-                        alt="An example of inconsistent CRM mobile branding in Slate, showing a generic grey header instead of a university's custom branding."
+                        src={image}
+                        alt={alt}
                         class="article-feature-image"
                     />
                 </div>
                 <div class="article-content">
-                    <h1>
-                        Does Your Slate Mobile Branding Display Consistently on
-                        Every Device?
-                    </h1>
+                    <h1>{title}</h1>
 
                     <p class="article-meta">Published on September 9, 2025</p>
 
@@ -140,10 +172,10 @@ import AuthorBlock from "../../components/AuthorBlock.astro";
                     <p>
                         <em
                             >Have questions about branding in Slate or looking
-                            for assistance to make your Slate forms, portals, or
-                            applications visually consistent with a new redesign
-                            of your institutional website? Contact us at <a
-                                href="mailto:info@predicatehighered.com"
+                            for assistance with making your Slate forms,
+                            portals, or applications visually consistent with a
+                            new redesign of your institutional website? Contact
+                            us at <a href="mailto:info@predicatehighered.com"
                                 >info@predicatehighered.com</a
                             > to learn how we can help.</em
                         >
@@ -156,5 +188,5 @@ import AuthorBlock from "../../components/AuthorBlock.astro";
     </main>
     <Insights />
     <Contact />
+    <Footer />
 </Layout>
-<Footer />

@@ -1,0 +1,483 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Insights from "../../components/Insights.astro";
+import Contact from "../../components/Contact.astro";
+import Footer from "../../components/Footer.astro";
+import { Image } from "astro:assets";
+import click_depth_chart from "../../assets/click_depth.png";
+import AuthorBlock from "../../components/AuthorBlock.astro";
+import "../../styles/global.css";
+import "../../styles/charts.css";
+import { chartData } from "../../data/rfi-analysis-data.js";
+
+// --- Page-Specific SEO & Content Data ---
+const title =
+    "How Many Clicks to Inquire? New 2025 Data from 1,200+ College Websites";
+const description =
+    "How many clicks does it take for a prospective student to request information? We analyzed over 1,200 college websites to establish benchmarks for RFI form accessibility.";
+const pubDate = "2025-09-19";
+const image = click_depth_chart;
+const alt = "An illustration of a Request Info button with a question mark";
+
+const absoluteImageUrl = new URL(image.src, Astro.site).href;
+
+// --- Chart Data & Logic ---
+const {
+    chartMaxY,
+    sizeLabels,
+    selectivityLabels,
+    allInstitutions,
+    slateVsOther,
+} = chartData;
+
+const bucketOrder = ["0-1", "2", "3", "4+"];
+---
+
+<Layout title={title} description={description} image={absoluteImageUrl}>
+    <script
+        type="application/ld+json"
+        slot="head-scripts"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: title,
+            description: description,
+            image: absoluteImageUrl,
+            author: {
+                "@type": "Person",
+                name: "Tristan Deveney",
+                url: new URL("/about#deveney-bio", Astro.site).href,
+            },
+            publisher: {
+                "@type": "Organization",
+                name: "Predicate Higher Ed",
+                logo: {
+                    "@type": "ImageObject",
+                    url: new URL("/assets/logo.svg", Astro.site).href,
+                },
+            },
+            datePublished: new Date(pubDate).toISOString(),
+        })}
+    />
+
+    <Header />
+    <main>
+        <section class="content-section article-page">
+            <div class="narrow-container">
+                <div class="article-header">
+                    <Image
+                        src={image}
+                        alt={alt}
+                        class="article-feature-image"
+                    />
+                </div>
+                <div class="article-content">
+                    <h1>{title}</h1>
+                    <p class="article-meta">Published on September 19, 2025</p>
+                    <p>
+                        You've just completed cycle prep tasks, including
+                        updates to your inquiry form. New entry term prompts are
+                        active, and your team has settled on refreshed language
+                        for your form questions.
+                    </p>
+                    <p>
+                        But have you ever had a nagging feeling that it's more
+                        difficult than it should be for prospective students to
+                        find the inquiry form on your website?
+                    </p>
+                    <h3>Benchmarking Inquiry Form Click Depth</h3>
+                    <p>
+                        You've clicked around on your own site and those of a
+                        few peer schools, but if you ever wished you had hard
+                        data to back up your argument that your inquiry form
+                        should be more prominent, we're here to help.
+                    </p>
+                    <p>
+                        Between mid-August and mid-September 2025, Predicate
+                        Higher Ed conducted an analysis of just over 1200
+                        college websites (including 750+ Slate schools) in order
+                        to establish benchmarking metrics you can use to
+                        understand how your inquiry form compares to those of
+                        similar institutions across the U.S.
+                    </p>
+
+                    <p>
+                        We're sharing the findings in a series of articles. In
+                        today's post, we're drilling down into how many clicks
+                        it takes for someone to get from homepage to inquiry
+                        form.
+                    </p>
+
+                    <p>
+                        This metric, known as <strong>click depth</strong>, is a
+                        critical performance indicator for college website
+                        optimization. A high click depth can be a significant
+                        barrier in the student recruitment funnel, potentially
+                        causing you to lose interested prospects before they
+                        ever have a chance to connect.
+                    </p>
+
+                    <h2 id="all-institutions">
+                        RFI Click Depth Across All Institutions
+                    </h2>
+
+                    <h3>Methodology</h3>
+
+                    <p>
+                        This analysis is based on a list of 1,203 U.S.
+                        institutions (50 states and DC) compiled from the 2023
+                        Integrated Postsecondary Education Data System (IPEDS)
+                        data center, provided by the National Center for
+                        Education Statistics. To facilitate peer comparisons,
+                        institutions were grouped using the Carnegie
+                        Classification of Institutions of Higher Education®.
+                    </p>
+
+                    <p class="attribution">
+                        Source: Carnegie Classification of Institutions of
+                        Higher Education®, American Council on Education.
+                        <a href="https://carnegieclassifications.acenet.edu"
+                            >carnegieclassifications.acenet.edu</a
+                        >
+                    </p>
+                    <p>
+                        Of the 1,203 institutions on our list, we were able to
+                        identify active inquiry forms for 1,146 schools.
+                    </p><p>
+                        Five institutions from the 2023 IPEDS data indicated
+                        they were either closed by 2025 or in the process of
+                        closing and no longer collecting inquiries.
+                    </p><p>
+                        For the remaining 52 institutions, we were not able to
+                        identify an inquiry form. In most cases, these schools
+                        simply listed an email or phone contact for students
+                        wishing to request more information, or provided a
+                        direct application.
+                    </p>
+                    <h3 id="all-carnegie-avg">
+                        Averages by Carnegie Classification
+                    </h3>
+
+                    <p>
+                        First, let's examine the average click depth across nine
+                        distinct Carnegie Classifications. The charts below are
+                        grouped by institutional degree level to facilitate
+                        easier comparison among direct peers.
+                    </p>
+
+                    <div class="chart-triptych">
+                        {
+                            allInstitutions.averagesByCarnegie.map(
+                                (chartGroup) => (
+                                    <div class="chart-container" role="figure">
+                                        <div class="chart-title small">
+                                            {chartGroup.title}
+                                        </div>
+                                        <div class="grouped-bar-chart-container">
+                                            <div class="y-axis">
+                                                <span>3.0</span>
+                                                <span>2.0</span>
+                                                <span>1.0</span>
+                                                <span>0.0</span>
+                                            </div>
+
+                                            <div class="chart-grid">
+                                                {chartGroup.data.map((item) => (
+                                                    <div class="chart-group">
+                                                        <div class="bars-container single-bar">
+                                                            <div
+                                                                class={`bar ${chartGroup.key}`}
+                                                                style={`height:${(item.average / chartMaxY) * 100}%;`}
+                                                                data-value={item.average.toFixed(
+                                                                    2,
+                                                                )}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div class="x-axis">
+                                                {chartGroup.data.map((item) => (
+                                                    <div class="group-label">
+                                                        {item.type.replace(
+                                                            /.*:\s|.*\//,
+                                                            "",
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ),
+                            )
+                        }
+                    </div>
+                    <p>
+                        <strong>Doctoral: Very High Research</strong> institutions
+                        have the highest average click depth at <strong
+                            >2.27 clicks</strong
+                        >, illustrating the friction is highest for prospective
+                        students who would like to demonstrate interest at R1s.
+                    </p><p>
+                        In contrast, <strong>Baccalaureate</strong> and <strong
+                            >Master's</strong
+                        > institutions had click depths consistently averaging around
+                        <strong>1.4 to 1.6 clicks</strong>.
+                    </p>
+                    <p>
+                        While the averages are helpful, it's worth noting that
+                        194 institutions, 17% of those where we were able to
+                        identify an inquiry form, placed it at a click depth of
+                        3 or more, and 12 in total placed it a depth of 5 or
+                        more.
+                    </p>
+
+                    <h2 id="slate-deep-dive">Slate Inquiry Form Click Depth</h2>
+                    <p>
+                        What happens when you limit the results to Slate
+                        schools?
+                    </p>
+                    <p>
+                        We identified whether the RFI for a given institution
+                        was a Slate form by using browser developer tools to
+                        inspect the embedded or linked form, then filtered the
+                        list down to schools where the form was hosted by Slate
+                        (note: for purposes of this analysis, we set aside
+                        schools where the most prominent inquiry form was
+                        provided by a third-party tool like Halda, even if there
+                        was evidence that the school uses Slate. More on that
+                        practice in future posts.)
+                    </p>
+
+                    <h3 id="slate-distributions">
+                        Click Depth Distributions by Carnegie Classification
+                        (Slate Schools)
+                    </h3>
+                    <p>
+                        While averages provide a useful single benchmark,
+                        analyzing the <em>distribution</em> of click depths reveals
+                        the variety of practices for Slate schools of the same institution
+                        type.
+                    </p><p>
+                        Do certain types of institutions overwhelming place
+                        inquiry forms 0-1 clicks from their homepage, or is it
+                        more common to see 2, 3, or 4+ clicks for some types?
+                        The charts below break down what percentage of Slate
+                        institutions fall into each click-depth bucket, along
+                        with the raw numbers falling into each bucket.
+                    </p>
+
+                    <div class="chart-container" role="figure">
+                        <div class="chart-title">
+                            Click Depth Distribution by Carnegie Classification
+                        </div>
+                        <div class="dist-legend">
+                            <div class="legend-group-label">Depth</div>
+                            <div class="legend-label-item">0-1 Clicks</div>
+                            <div class="legend-label-item">2 Clicks</div>
+                            <div class="legend-label-item">3 Clicks</div>
+                            <div class="legend-label-item">4+ Clicks</div>
+
+                            <div class="legend-group-label"></div>
+                            <div class="legend-swatch bucket-0-1"></div>
+                            <div class="legend-swatch bucket-2"></div>
+                            <div class="legend-swatch bucket-3"></div>
+                            <div class="legend-swatch bucket-4-plus"></div>
+                        </div>
+                        <div class="dist-grid-container vertical">
+                            {
+                                slateVsOther.distributionsByCarnegie.map(
+                                    ({ type, slateData }) => (
+                                        <div class="dist-grid-row">
+                                            <div class="dist-label">{type}</div>
+                                            <div class="dist-bar-cell">
+                                                {slateData?.total > 0 && (
+                                                    <div class="stacked-bar">
+                                                        {bucketOrder.map(
+                                                            (key) => (
+                                                                <div
+                                                                    class={`bar-segment bucket-${key.replace("+", "-plus")}`}
+                                                                    style={`width: ${slateData.percentages[key]}%`}
+                                                                    data-tooltip={`${key} Clicks: ${slateData.percentages[key].toFixed(1)}% (${slateData.raw[key]})`}
+                                                                />
+                                                            ),
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ),
+                                )
+                            }
+                        </div>
+                        <figcaption class="chart-caption">
+                            For Slate institutions in each Carnegie
+                            Classification, stacked bars indicate the percentage
+                            placing the inquiry form a certain number of clicks
+                            from the homepage.
+                        </figcaption>
+                    </div>
+                    <p>
+                        <strong>How Do You Compare?</strong> Find your institution
+                        classification and the number of clicks it takes you to get
+                        from the homepage to your inquiry form. For example, if you
+                        work at a Baccalaureate: Arts & Sciences institution and
+                        know that it takes 3 clicks to get to the inquiry form from
+                        your homepage, then 84% of your peer institutions make it
+                        easier for prospects to reach their inquiry forms than your
+                        institution.
+                    </p>
+
+                    <p>
+                        <strong>Why 0 or 1?</strong> Out of 778 Slate schools, only
+                        11 had the form embedded directly on the homepage, requiring
+                        0 clicks, but 367 did have a direct link, like a 'Request
+                        Info' button; in terms of friction, we consider these to
+                        be equally easy to access.
+                    </p>
+
+                    <h3 id="slate-size-selectivity-dist">
+                        Distribution by Size & Selectivity
+                    </h3>
+                    <p>
+                        Another way to visualize the differences in click depth
+                        practices is by size and selectivity, again drawing on
+                        IPEDS data for total enrollment as of 2023 and
+                        calculating admit rates as 2023 Admits / 2023
+                        Applicants.
+                    </p>
+                    <p>
+                        When divided into four groups based on selectivity—those
+                        admitting less than 25%, 25-50%, 50-75%, or more than
+                        75%—and by enrollment—those with fewer than 2500
+                        students, 2500-7500, 7500-20000, and more than 20000—we
+                        can see the following:
+                    </p>
+
+                    <div class="chart-container" role="figure">
+                        <div class="chart-title">
+                            Click Depth Distribution by Size & Selectivity
+                        </div>
+                        <div class="dist-legend">
+                            <div class="legend-group-label">Depth</div>
+                            <div class="legend-label-item">0-1 Clicks</div>
+                            <div class="legend-label-item">2 Clicks</div>
+                            <div class="legend-label-item">3 Clicks</div>
+                            <div class="legend-label-item">4+ Clicks</div>
+
+                            <div class="legend-group-label"></div>
+                            <div class="legend-swatch bucket-0-1"></div>
+                            <div class="legend-swatch bucket-2"></div>
+                            <div class="legend-swatch bucket-3"></div>
+                            <div class="legend-swatch bucket-4-plus"></div>
+                        </div>
+                        <div class="small-multiples-grid">
+                            <div class="sm-header"></div>
+                            {
+                                selectivityLabels.map((label) => (
+                                    <div class="sm-header">{label}</div>
+                                ))
+                            }
+                            {
+                                sizeLabels.map((size) => (
+                                    <>
+                                        <div class="sm-header row-header">
+                                            {size}
+                                        </div>
+                                        {selectivityLabels.map(
+                                            (selectivity) => {
+                                                const item =
+                                                    slateVsOther.distributionsBySizeSelectivity.find(
+                                                        (d) =>
+                                                            d.size === size &&
+                                                            d.selectivity ===
+                                                                selectivity,
+                                                    );
+                                                const slateData =
+                                                    item?.slateData;
+                                                const otherData =
+                                                    item?.otherData;
+                                                return (
+                                                    <div class="sm-cell">
+                                                        {slateData &&
+                                                        slateData.total > 0 ? (
+                                                            <div class="stacked-bar">
+                                                                {bucketOrder.map(
+                                                                    (key) => (
+                                                                        <div
+                                                                            class={`bar-segment bucket-${key.replace("+", "-plus")}`}
+                                                                            style={`width: ${slateData.percentages[key]}%`}
+                                                                            data-tooltip={`${key} Clicks: ${slateData.percentages[key].toFixed(1)}% (${slateData.raw[key]})`}
+                                                                        />
+                                                                    ),
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <div class="sm-no-data">
+                                                                No Slate Data
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            },
+                                        )}
+                                    </>
+                                ))
+                            }
+                        </div>
+                        <figcaption class="chart-caption">
+                            Comparison of click distributions by size and
+                            selectivity.
+                        </figcaption>
+                    </div>
+                    <p>
+                        Small, moderately selectively institutions offer the
+                        least friction, with more than 75% in the 0-1 click
+                        category. By contrast, at the largest and most selective
+                        institutions, a third of inquiry forms were 4+ clicks
+                        away.
+                    </p>
+
+                    <h3>Conclusion: Every Click Counts</h3>
+                    <p>
+                        Institutional websites serve many difficult audiences,
+                        from prospective students and their families to alumni,
+                        current students, faculty and staff, members of the
+                        media, local communities, and more. A button on the
+                        homepage is prime real estate, and with many
+                        stakeholders vying for that space, it can be a challenge
+                        to argue that the inquiry form should be more prominent.
+                        Without it, though, prospective students may be
+                        encountering more friction on your site than on those of
+                        the other schools on their list. When someone is ready
+                        to raise their hand and inquire, the process should be
+                        smooth and intuitive.
+                    </p>
+                    <p>
+                        We hope that by providing this benchmarking data,
+                        marketing and enrollment teams will better understand
+                        how their practices compare to their peers, and, where
+                        there's a gap, give you the evidence you need to
+                        advocate for making your inquiry form more accessible.
+                    </p>
+                    <p>
+                        <em
+                            >Interested in benchmarking your form in more detail
+                            against your closest peer institutions? Contact us
+                            at <a href="mailto:info@predicatehighered.com"
+                                >info@predicatehighered.com</a
+                            > for more about custom reports we can prepare for your
+                            school.</em
+                        >
+                    </p>
+
+                    <AuthorBlock />
+                </div>
+            </div>
+        </section>
+    </main>
+    <Insights />
+    <Contact />
+    <Footer />
+</Layout>
