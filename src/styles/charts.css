@@ -179,13 +179,139 @@
     top: 66.67%;
 }
 
+/* Fix for chart consistency across browsers */
+
+/* Update the chart-group to use explicit width instead of flex */
 .chart-group {
-    flex: 1;
+    width: calc(100% / var(--chart-columns, 3));
+    /* Default to 3 columns */
     display: flex;
     justify-content: center;
-    max-width: 90px;
+    max-width: none;
+    /* Remove the 90px constraint */
     height: 100%;
-    margin: 0 0.75rem;
+    margin: 0 0.5rem;
+    /* Reduce margin slightly */
+    min-width: 0;
+    /* Prevent flex items from overflowing */
+}
+
+/* Add CSS custom properties for different chart types */
+.chart-triptych .chart-container:nth-child(1) .chart-group {
+    text-align: center;
+    --chart-columns: 3;
+    /* Baccalaureate has 3 items */
+}
+
+.chart-triptych .chart-container:nth-child(2) .chart-group {
+    --chart-columns: 3;
+    /* Master's has 3 items */
+}
+
+.chart-triptych .chart-container:nth-child(3) .chart-group {
+    --chart-columns: 3;
+    /* Doctoral has 3 items */
+}
+
+.chart-title.small {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Improve x-axis label wrapping */
+.x-axis {
+    grid-row: 2;
+    grid-column: 2;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 0.75rem;
+    border-top: 1px solid #ddd;
+    min-height: 4em;
+    /* Increase minimum height */
+    align-items: flex-start;
+}
+
+.group-label {
+    flex: 1;
+    font-size: 0.75rem;
+    text-align: center;
+    color: var(--color-text-light);
+    line-height: 1.2;
+    /* Tighter line height */
+    word-wrap: break-word;
+    /* Force word wrapping */
+    overflow-wrap: break-word;
+    /* Modern property for word wrapping */
+    hyphens: auto;
+    /* Enable hyphenation if needed */
+    padding: 0 0.25rem;
+    /* Add small padding */
+    max-width: 100%;
+    /* Ensure it doesn't overflow */
+    box-sizing: border-box;
+}
+
+/* Alternative approach: Use CSS Grid for more control */
+.chart-grid-alternative {
+    grid-row: 1;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 1rem;
+    align-items: flex-end;
+    position: relative;
+    height: 200px;
+    padding: 0 0.5rem;
+}
+
+.x-axis-alternative {
+    grid-row: 2;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #ddd;
+    min-height: 4em;
+}
+
+/* Media query adjustments for smaller screens */
+@media (max-width: 900px) {
+    .chart-triptych {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .group-label {
+        font-size: 0.7rem;
+        min-height: 3em;
+    }
+}
+
+/* Browser-specific fixes */
+@supports (-webkit-appearance: none) {
+
+    /* Chrome/Safari specific fixes */
+    .chart-group {
+        flex-shrink: 0;
+        /* Prevent shrinking */
+    }
+
+    .group-label {
+        word-break: break-word;
+        /* WebKit word breaking */
+    }
+}
+
+@supports (-moz-appearance: none) {
+
+    /* Firefox specific adjustments if needed */
+    .group-label {
+        overflow-wrap: anywhere;
+        /* Firefox alternative */
+    }
 }
 
 .bars-container {
@@ -256,15 +382,12 @@
     justify-content: space-around;
     padding-top: 0.75rem;
     border-top: 1px solid #ddd;
+    min-height: 3.5em;
+    /* Add this line */
+    align-items: start;
+    /* Add this to align text to the top */
 }
 
-.group-label {
-    flex: 1;
-    font-size: 0.75rem;
-    text-align: center;
-    color: var(--color-text-light);
-    line-height: 1.3;
-}
 
 /* --- Heatmap Grid --- */
 .heatmap-grid {
