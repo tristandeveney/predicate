@@ -950,7 +950,7 @@ p {
     height: 200px;
     background-color: var(--color-primary);
     background-size: cover;
-    /* background-position: center; */
+    background-position: center top;
 }
 
 .card-content {
