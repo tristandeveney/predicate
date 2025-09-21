@@ -7,8 +7,6 @@ export default defineConfig({
     trailingSlash: 'always',
 
     integrations: [
-        sitemap({
-            canonical: true,
-        }),
+        sitemap(),
     ],
 });
