@@ -1,12 +1,32 @@
 ---
 import click_depth from "../assets/click_depth.png";
 import mobile_branding_example from "../assets/mobile_branding_example.png";
+import form_questions from "../assets/form-questions.png";
 ---
 
 <section id="insights">
     <div class="container">
         <h2 class="centered-heading fade-in">INSIGHTS & RESOURCES</h2>
         <div class="insights-grid">
+             <article
+                class="insight-card fade-in"
+                style="transition-delay: 0.2s;"
+            >
+                <div
+                    class="card-visual"
+                    style={`background-image: url('${form_questions.src}');`}
+                >
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">Article</span>
+                    <h3>
+                        <a href="/articles/form-questions-2025/">
+                            2025 Inquiry Form Benchmarks: An In-Depth Look at 750+ Slate Schools
+                        </a>
+                    </h3>
+                    <p class="read-more">Read More &rarr;</p>
+                </div>
+            </article>
             <article
                 class="insight-card fade-in"
                 style="transition-delay: 0.2s;"
@@ -19,7 +39,7 @@ import mobile_branding_example from "../assets/mobile_branding_example.png";
                 <div class="card-content">
                     <span class="card-tag">Article</span>
                     <h3>
-                        <a href="/articles/click-depth">
+                        <a href="/articles/click-depth/">
                             How Many Clicks to Inquire? New 2025 Data from
                             1,200+ College Websites
                         </a>
@@ -39,7 +59,7 @@ import mobile_branding_example from "../assets/mobile_branding_example.png";
                 <div class="card-content">
                     <span class="card-tag">Article</span>
                     <h3>
-                        <a href="/articles/mobile-branding">
+                        <a href="/articles/mobile-branding/">
                             Does Your Slate Mobile Branding Display Consistently
                             on Every Device?
                         </a>

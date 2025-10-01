@@ -1,0 +1,628 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Insights from "../../components/Insights.astro";
+import Contact from "../../components/Contact.astro";
+import Footer from "../../components/Footer.astro";
+import { Image } from "astro:assets";
+import click_depth_chart from "../../assets/form-questions.png";
+import AuthorBlock from "../../components/AuthorBlock.astro";
+import "../../styles/global.css";
+import "../../styles/charts.css";
+
+import DistributionChart from "../../components/DistributionChart.astro";
+import {
+    formData,
+    buckets,
+    sizeLabels,
+    selectivityLabels,
+} from "../../data/form-analysis-data.js";
+
+// --- Page-Specific SEO & Content Data ---
+const title =
+    "2025 Inquiry Form Benchmarks: An In-Depth Look at 750+ Slate Schools";
+const description =
+    "A deep dive into common inquiry form practices, from average length and common questions to UX choices and consent language. See how your RFI form compares to national benchmarks.";
+const pubDate = "2025-10-01";
+const image = click_depth_chart;
+const alt =
+    "An illustration representing data analysis of college inquiry forms.";
+const absoluteImageUrl = new URL(image.src, Astro.site).href;
+---
+
+<Layout title={title} description={description} image={absoluteImageUrl}>
+    <script
+        type="application/ld+json"
+        slot="head-scripts"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: title,
+            description: description,
+            image: absoluteImageUrl,
+            author: {
+                "@type": "Person",
+                name: "Tristan Deveney",
+                url: new URL("/about#deveney-bio", Astro.site).href,
+            },
+            publisher: {
+                "@type": "Organization",
+                name: "Predicate Higher Ed",
+                logo: {
+                    "@type": "ImageObject",
+                    url: new URL("/assets/logo.svg", Astro.site).href,
+                },
+            },
+            datePublished: new Date(pubDate).toISOString(),
+            dateModified: new Date(pubDate).toISOString(),
+        })}
+    />
+
+    <Header />
+    <main>
+        <section class="content-section article-page">
+            <div class="narrow-container">
+                <div class="article-header">
+                    <Image
+                        src={image}
+                        alt={alt}
+                        class="article-feature-image"
+                    />
+                </div>
+                <div class="article-content">
+                    <h1>{title}</h1>
+                    <p class="article-meta">Published on October 1, 2025</p>
+                    <p>
+                        After a prospective student has <a
+                            href="/articles/click-depth/"
+                            >clicked through to your inquiry form</a
+                        >, what can they expect to find? How many questions will
+                        they have to answer in order to join your mailing list?
+                        What kinds of information will they be prompted to
+                        provide?
+                    </p>
+                    <p>
+                        As part of our analysis of more than 750 Slate inquiry
+                        forms in 2025, we looked at how different institution
+                        types approached the length and structure of their
+                        inquiry forms, including, in the case of certain fields, <em
+                            >how</em
+                        > the fields are mapped.
+                    </p>
+                    <p>
+                        To help understand variations across institution types,
+                        we've broken down institutions based on Carnegie
+                        Classification of Institutions of Higher Education® and
+                        by IPEDS data on selectivity and institution size.
+                    </p>
+
+                    <p class="attribution">
+                        Source: Carnegie Classification of Institutions of
+                        Higher Education®, American Council on Education.
+                        <a href="https://carnegieclassifications.acenet.edu"
+                            >carnegieclassifications.acenet.edu</a
+                        >
+                    </p>
+
+                    <div class="toc-container">
+                        <p class="toc-title">In This Article</p>
+                        <ul>
+                            <li>
+                                <a href="#form-length-core"
+                                    >Form Length & Core Questions</a
+                                >
+                                <ul>
+                                    <li>
+                                        <a href="#form-length">1. Form Length</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="#academic-timing"
+                                            >2. Academic & Timing Information</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#audience-communication"
+                                    >Audience & Communication</a
+                                >
+                                <ul>
+                                    <li>
+                                        <a href="#user-identification"
+                                            >3. Identifying the User</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="#parent-info"
+                                            >4. Parent Information</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="#sms-consent"
+                                            >5. SMS & Texting Consent</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#marketing-ux"
+                                    >Marketing & User Experience</a
+                                >
+                                <ul>
+                                    <li>
+                                        <a href="#marketing-attribution"
+                                            >6. Marketing Attribution</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="#optional-step"
+                                            >7. The Optional Step</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#conclusion">Conclusion</a></li>
+                        </ul>
+                    </div>
+
+                    <h2 id="form-length-core">Form Length & Core Questions</h2>
+
+                    <h3 id="form-length">1. Form Length</h3>
+                    <p>
+                        Across all Slate institutions that had a single-page
+                        form, the average inquiry form contained <strong
+                            >16.3 questions</strong
+                        >. This count includes questions that appeared based on
+                        conditional logic for prospective first-year students
+                        who were opting in to provide core contact information
+                        for themselves and a parent. If a form appeared to offer
+                        additional sections for students wishing to provide more
+                        detailed information about athletics, extracurriculars,
+                        or specialized pre-professional interests, those were
+                        excluded from the count.
+                    </p>
+                    <p>
+                        When forms are grouped into five buckets based on
+                        length, we found that Baccalaureate Colleges (Arts &
+                        Sciences Focus) were more likely than other types to
+                        have forms at the two extremes, with either fewer than
+                        10 questions or more than 25 questions:
+                    </p>
+                    <DistributionChart
+                        type="carnegie"
+                        title="Form Length Distribution by Carnegie Classification"
+                        caption="For institutions in each Carnegie Classification, bars indicate the percentage of inquiry forms that fall into different length buckets."
+                        data={formData.formLength.carnegieDistribution}
+                        bucketOrder={Object.keys(buckets.formLength)}
+                        bucketConfig={buckets.formLength}
+                        legendLabel="# of Qs"
+                    />
+                    <p>
+                        When grouping by size and selectivity, it becomes
+                        clearer that the most selective institutions
+                        (particularly the smallest) are the likeliest to have
+                        longer forms:
+                    </p>
+                    <DistributionChart
+                        type="small-multiples"
+                        title="Form Length Distribution by Size and Selectivity"
+                        caption="Smaller, more selective institutions tend toward longer forms, while larger, less selective institutions show a wider range of form lengths."
+                        data={formData.formLength.sizeSelectivityDistribution}
+                        rowLabels={sizeLabels}
+                        colLabels={selectivityLabels}
+                        bucketOrder={Object.keys(buckets.formLength)}
+                        bucketConfig={buckets.formLength}
+                        legendLabel="# of Qs"
+                    />
+
+                    <h3 id="academic-timing">
+                        2. Academic & Timing Information
+                    </h3>
+                    <p>
+                        Asking for a prospective student's academic and timing
+                        interests are overwhelmingly common practices. <strong
+                            >98%</strong
+                        >
+                        of forms ask for an intended <strong>entry term</strong
+                        >, and
+                        <strong>87%</strong> ask for a <strong
+                            >program of interest</strong
+                        >.
+                    </p>
+
+                    <DistributionChart
+                        type="carnegie"
+                        title="Forms That Ask for Program of Interest"
+                        caption="The strong majority of institutions, regardless of type, collect academic interest on their inquiry forms, though R1s and baccalaureate colleges (arts & sciences focus) did not in roughly a quarter of cases."
+                        data={formData.academicInterest.carnegieDistribution}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Asks?"
+                    />
+                    <DistributionChart
+                        type="small-multiples"
+                        title="Forms That Ask for Program of Interest by Size & Selectivity"
+                        caption="Collection of academic interest is widespread across all segments, although one exception was highly selective medium-sized institution, where only 50% collected major."
+                        data={formData.academicInterest
+                            .sizeSelectivityDistribution}
+                        rowLabels={sizeLabels}
+                        colLabels={selectivityLabels}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Asks?"
+                    />
+
+                    <DistributionChart
+                        type="carnegie"
+                        title="Forms That Ask for Entry Term"
+                        caption="Nearly all institutions collect the student's intended start term on their inquiry forms."
+                        data={formData.entryTerm.carnegieDistribution}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Asks?"
+                    />
+                    <DistributionChart
+                        type="small-multiples"
+                        title="Forms That Ask for Entry Term by Size & Selectivity"
+                        caption="Asking for an intended entry term is a standard practice across the board."
+                        data={formData.entryTerm.sizeSelectivityDistribution}
+                        rowLabels={sizeLabels}
+                        colLabels={selectivityLabels}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Asks?"
+                    />
+
+                    <h2 id="audience-communication">
+                        Audience & Communication
+                    </h2>
+
+                    <h3 id="user-identification">
+                        3. Identifying the User: Parent or Student?
+                    </h3>
+                    <p>
+                        One challenge with inquiry forms is that the person
+                        filling out the form might not be the student: parents,
+                        counselors, or alumni might sign up or refer a student;
+                        if the wording of questions isn't clear, this can
+                        sometimes lead to inquiry records being created in the
+                        name of those individuals, rather than in the name of
+                        the student.
+                    </p>
+                    <p>
+                        Some schools attempt to solve for this challenge by
+                        asking an identifying question, usually at the top of
+                        the form, and then either conditionally displaying
+                        different sets of questions or routing the parent or
+                        other individual to a dedicated form. We wanted to
+                        measure how common this practice had become as of 2025,
+                        and whether it was more common at certain types of
+                        institutions than others.
+                    </p>
+                    <DistributionChart
+                        type="carnegie"
+                        title="Forms That Ask 'Parent or Student?' by Carnegie Classification"
+                        caption="Percentage of forms that include a field to identify the user type."
+                        data={formData.parentIdentifier.carnegieDistribution}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Asks?"
+                    />
+                    <DistributionChart
+                        type="small-multiples"
+                        title="Forms That Ask 'Parent or Student?' by Size & Selectivity"
+                        caption="While not common, there was a greater tendency at larger institutions to ask identifying questions, while the smaller, more selective institutions were the least likely to do so."
+                        data={formData.parentIdentifier
+                            .sizeSelectivityDistribution}
+                        rowLabels={sizeLabels}
+                        colLabels={selectivityLabels}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Asks?"
+                    />
+
+                    <h3 id="parent-info">4. Parent & Family Information</h3>
+                    <p>
+                        As schools seek to engage parents directly, collecting
+                        parent information at the point of inquiry can help
+                        create opportunities for engagement earlier in the
+                        recruitment process.
+                    </p><p>
+                        For many institutions that implemented Slate pre-COVID,
+                        it was common to create custom person-scoped fields to
+                        store parent contact information, with the standard
+                        relation table only being mapped at point of
+                        application. This approach was often recommended in
+                        order to help avoid data issues (inconsistent email
+                        addresses or spellings of parent names) from lower
+                        quality sources like inquiry forms, compared to the
+                        application. Discrepancies can result in duplicate
+                        relation records if relationship type is not collected,
+                        for example, or if first name and last name are
+                        inconsistent (see <a
+                            href="https://knowledge.technolutions.net/docs/relationship-records#mapping-to-relationship-fields-in-form-events"
+                            >this KB article</a
+                        >)
+                    </p>
+                    <p>
+                        While many schools do still use these custom fields, the
+                        majority of those that collect parent information on the
+                        inquiry form do so by mapping directly to the relation
+                        table. With parent information stored using relation
+                        records, it becomes possible to build recipient list
+                        queries using the relation base for parent
+                        communications, following the Technolutions best
+                        practice for <a
+                            href="https://knowledge.technolutions.net/v1/docs/en/messaging-relationship-records"
+                            >Messaging Relationship Records</a
+                        >.
+                    </p>
+                    <DistributionChart
+                        type="carnegie"
+                        title="Parent Information Collection Method by Carnegie Classification"
+                        caption="How institutions collect and store parent/family information from inquiry forms."
+                        data={formData.parentInfo.carnegieDistribution}
+                        bucketOrder={Object.keys(buckets.parentInfo)}
+                        bucketConfig={buckets.parentInfo}
+                        legendLabel="Method"
+                    />
+                    <DistributionChart
+                        type="small-multiples"
+                        title="Parent Information Collection Method by Size & Selectivity"
+                        caption="With many of the smaller, more selective institutions implementing Slate 10+ years ago, the practice of using custom fields is still most common with this cohort, while more recent adopters overwhelmingly default to using the relation table directly."
+                        data={formData.parentInfo.sizeSelectivityDistribution}
+                        rowLabels={sizeLabels}
+                        colLabels={selectivityLabels}
+                        bucketOrder={Object.keys(buckets.parentInfo)}
+                        bucketConfig={buckets.parentInfo}
+                        legendLabel="Method"
+                    />
+
+                    <h3 id="sms-consent">5. SMS & Texting Consent</h3>
+                    <p>
+                        Engaging prospective students via text is a common
+                        practice, but we observed that a significant proportion
+                        of schools rely on passive disclaimer language rather
+                        than standalone fields that capture explicit opt-in
+                        consent.
+                    </p><p>
+                        Between regulations and carrier A2P compliance standards
+                        requiring affirmative opt-ins, we recommend that schools
+                        consult with their general counsel's office to ensure
+                        their practices are compliant. Technolutions includes
+                        suggested "Further reading about A2P 10DLC" in their <a
+                            href="https://knowledge.technolutions.net/v1/docs/compliance-dashboard"
+                            >Compliance Dashboard</a
+                        > Knowledge Base article.
+                    </p>
+                    <p>
+                        Notably, we also observed a trend of this disclaimer
+                        language being expanded to include consent for
+                        AI-generated calls or messages, adding another layer for
+                        review.
+                    </p>
+                    <DistributionChart
+                        type="carnegie"
+                        title="SMS Consent Practices by Carnegie Classification"
+                        caption="How institutions collect cell phone numbers and consent for text messaging."
+                        data={formData.smsConsent.carnegieDistribution}
+                        bucketOrder={Object.keys(buckets.smsConsent)}
+                        bucketConfig={buckets.smsConsent}
+                        legendLabel="Practice"
+                    />
+                    <DistributionChart
+                        type="small-multiples"
+                        title="SMS Consent Practices by Size & Selectivity"
+                        caption="Across school types, our recommendation is to have your OGC review your SMS consent practices regularly."
+                        data={formData.smsConsent.sizeSelectivityDistribution}
+                        rowLabels={sizeLabels}
+                        colLabels={selectivityLabels}
+                        bucketOrder={Object.keys(buckets.smsConsent)}
+                        bucketConfig={buckets.smsConsent}
+                        legendLabel="Practice"
+                    />
+
+                    <h2 id="marketing-ux">Marketing & User Experience</h2>
+                    <p>
+                        Finally, we analyzed questions related to marketing
+                        intelligence and user experience design patterns.
+                    </p>
+
+                    <h3>
+                        <h3 id="marketing-attribution">
+                            6. Marketing Attribution: "How Did You Hear About
+                            Us?"
+                        </h3>
+                    </h3>
+                    <p>
+                        If stakeholders are pushing for greater clarity around
+                        marketing attribution and the source of leads, adding a
+                        question directly to the inquiry form can be tempting.
+                        However, this is relatively uncommon across school
+                        types, and adds to form length. If gathering this
+                        information at point of inquiry is not affecting your
+                        follow up outreach, it may be more beneficial to save
+                        the collection of this data point for later in the
+                        process.
+                    </p>
+                    <DistributionChart
+                        type="carnegie"
+                        title="Forms With Marketing Source Questions by Carnegie Classification"
+                        caption="Percentage of forms that ask 'How did you hear about us?' or a similar question."
+                        data={formData.marketingSource.carnegieDistribution}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Asks?"
+                    />
+                    <DistributionChart
+                        type="small-multiples"
+                        title="Forms With Marketing Source Questions by Size & Selectivity"
+                        caption="Overall, 11% of schools include a question like 'How did you hear about us?' on their inquiry forms."
+                        data={formData.marketingSource
+                            .sizeSelectivityDistribution}
+                        rowLabels={sizeLabels}
+                        colLabels={selectivityLabels}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Asks?"
+                    />
+
+                    <h3 id="optional-step">
+                        7. Including Optional Steps: "Have Time for More?"
+                    </h3>
+                    <p>
+                        One solution to the problem of overly long forms is to
+                        give students the choice: you can either submit right
+                        away, providing only the essential data points, or, if
+                        you have a few moments, provide additional details.
+                    </p><p>
+                        As with collecting marketing attribution data, it's
+                        important to make sure the data collected in these
+                        optional sections is useful and helps inform the
+                        relationship you're developing, rather than simply
+                        collecting data for the sake of easier reporting. It's
+                        worth asking whether these additional data points could
+                        be collected instead as part of a follow-up, so that the
+                        focus remains on the student's needs.
+                    </p>
+                    <DistributionChart
+                        type="carnegie"
+                        title="Forms With an Optional Final Step by Carnegie Classification"
+                        caption="Percentage of forms that offer an optional section for more information."
+                        data={formData.optionalStep.carnegieDistribution}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Has Step?"
+                    />
+                    <DistributionChart
+                        type="small-multiples"
+                        title="Forms With an Optional Final Step by Size & Selectivity"
+                        caption="Larger, highly selective institutions were the outlier, with more than a third taking this approach."
+                        data={formData.optionalStep.sizeSelectivityDistribution}
+                        rowLabels={sizeLabels}
+                        colLabels={selectivityLabels}
+                        bucketOrder={Object.keys(buckets.binary)}
+                        bucketConfig={buckets.binary}
+                        legendLabel="Has Step?"
+                    />
+
+                    <h3 id="conclusion">
+                        Conclusion: Revisiting Form Practices to Reduce Friction
+                        for Prospective Students
+                    </h3>
+                    <p>
+                        While every institution takes its own approach to
+                        collecting inquiry data, it's important to understand
+                        the evolving practices of your peer institutions and to regularly review how your own approach compares.</p> 
+                    <p> A great inquiry form experience remains centered on the student: asking only what's needed to spark further discussion and build a relationship. Reducing the friction students experience in filling out your inquiry forms is our goal with this analysis, whether that involves cutting a few fields, changing how you're
+                        collecting a key data point, or giving users an
+                        experience that adapts to their preferences. </p><p>As you discuss your form questions with your team, we hope this analysis helps guide those conversations toward a student experience that is intentional and focused on building great relationships.
+                    </p>
+                    <em
+                        >Looking for direction around your Slate data collection and reporting? Reach out to
+                       <a href="mailto:info@predicatehighered.com"
+                                >info@predicatehighered.com</a> to discuss how we can help.</em
+                    >
+
+                    <AuthorBlock />
+                </div>
+            </div>
+        </section>
+    </main>
+    <Insights />
+    <Contact />
+    <Footer />
+
+    <style is:global>
+        .content-section .article-content h2[id],
+        .content-section .article-content h3[id] {
+            scroll-margin-top: 10rem;
+        }
+
+        /* Form Length Buckets */
+        .bucket-lt_10 {
+            background-color: #deedfc;
+        }
+        .bucket-b_10_14 {
+            background-color: #cad8e6;
+        }
+        .bucket-b_15_19 {
+            background-color: #829dbe;
+        }
+        .bucket-b_20_24 {
+            background-color: #385c8a;
+        }
+        .bucket-gte_25 {
+            background-color: #0a2540;
+        }
+
+        /* Binary Yes/No Buckets */
+        .bucket-y {
+            background-color: #0a2540;
+        }
+        .bucket-n {
+            background-color: #829dbe;
+        }
+
+        /* SMS Consent Buckets */
+        .bucket-consent {
+            background-color: #0a2540;
+        }
+        .bucket-no_consent {
+            background-color: #385c8a;
+        }
+        .bucket-no_ask {
+            background-color: #829dbe;
+        }
+
+        /* Parent Info Buckets */
+        .bucket-relation {
+            background-color: #0a2540;
+        }
+        .bucket-custom {
+            background-color: #385c8a;
+        }
+        .bucket-other {
+            background-color: #829dbe;
+        }
+
+        .toc-container {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .toc-title {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            margin: 0 0 1rem 0;
+        }
+        .toc-container ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .toc-container ul ul {
+            padding-left: 1.25rem;
+            margin-top: 0.5rem;
+        }
+        .toc-container li {
+            margin-bottom: 0.5rem;
+        }
+        .toc-container a {
+            color: var(--color-text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .toc-container ul ul a {
+            font-weight: 400;
+        }
+        .toc-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</Layout>

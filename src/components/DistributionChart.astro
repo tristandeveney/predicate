@@ -1,0 +1,115 @@
+---
+interface Props {
+    type: "carnegie" | "small-multiples";
+    title: string;
+    caption: string;
+    data: any[];
+    rowLabels?: string[];
+    colLabels?: string[];
+    bucketOrder: string[];
+    bucketConfig: Record<string, { label: string; color: string }>;
+    legendLabel: string;
+}
+
+const {
+    type,
+    title,
+    caption,
+    data,
+    rowLabels,
+    colLabels,
+    bucketOrder,
+    bucketConfig,
+    legendLabel,
+} = Astro.props;
+const numBuckets = bucketOrder.length;
+---
+
+<div class="chart-container" role="figure">
+    <div class="chart-title">{title}</div>
+    <div class="dist-legend" style={`--num-legend-buckets: ${numBuckets};`}>
+        <div class="legend-group-label">{legendLabel}</div>
+        {
+            bucketOrder.map((key) => (
+                <div class="legend-label-item">{bucketConfig[key].label}</div>
+            ))
+        }
+        <div class="legend-group-label"></div>
+        {
+            bucketOrder.map((key) => (
+                <div class={`legend-swatch bucket-${key}`} />
+            ))
+        }
+    </div>
+
+    {
+        type === "carnegie" && (
+            <div class="dist-grid-container vertical">
+                {data.map(({ type, data: rowData }) => (
+                    <div class="dist-grid-row">
+                        <div class="dist-label">{type}</div>
+                        <div class="dist-bar-cell">
+                            <div class="stacked-bar">
+                                {bucketOrder.map((key) => (
+                                    <div
+                                        class={`bar-segment bucket-${key}`}
+                                        style={`width: ${rowData[key]}%`}
+                                        data-tooltip={`${bucketConfig[key].label}: ${rowData[key].toFixed(1)}%`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
+    {
+        type === "small-multiples" && rowLabels && colLabels && (
+            <div class="small-multiples-grid">
+                <div class="sm-header" />
+                {colLabels.map((label) => (
+                    <div class="sm-header">{label}</div>
+                ))}
+                {rowLabels.map((rowLabel) => (
+                    <>
+                        <div class="sm-header row-header">{rowLabel}</div>
+                        {colLabels.map((colLabel) => {
+                            const cellData = data.find(
+                                (d) =>
+                                    d.size === rowLabel &&
+                                    d.selectivity === colLabel,
+                            );
+                            return (
+                                <div class="sm-cell">
+                                    {cellData && cellData.total > 0 ? (
+                                        <div class="stacked-bar">
+                                            {bucketOrder.map((key) => (
+                                                <div
+                                                    class={`bar-segment bucket-${key}`}
+                                                    style={`width: ${cellData.data[key]}%`}
+                                                    data-tooltip={`${bucketConfig[key].label}: ${cellData.data[key].toFixed(1)}%`}
+                                                />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div class="sm-no-data">No Data</div>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </>
+                ))}
+            </div>
+        )
+    }
+
+    <figcaption class="chart-caption">{caption}</figcaption>
+</div>
+
+<style>
+    .dist-legend {
+        grid-template-columns: auto repeat(var(--num-legend-buckets, 4), 1fr);
+    }
+</style>
