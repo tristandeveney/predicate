@@ -1,0 +1,12 @@
+---
+// Change this line to use your new layout
+import FullWidthLayout from "../layouts/SandboxLayout.astro";
+import QuerySandbox from "../components/QuerySandbox.svelte";
+---
+
+<FullWidthLayout
+    title="Interactive Query Sandbox"
+    description="An interactive tool for learning the Slate query builder."
+>
+    <div style="padding: 2rem 5%;"><QuerySandbox client:visible /></div>
+</FullWidthLayout>

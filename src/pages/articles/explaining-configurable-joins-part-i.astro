@@ -1,0 +1,235 @@
+---
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+
+import ProfileViewExplainer from "../../components/ProfileViewExplainer.svelte";
+import ListViewExplainer from "../../components/ListViewExplainer.svelte";
+import JoinExplainer from "../../components/JoinExplainer.svelte";
+import JoinExplainerRanked from "../../components/JoinExplainerRanked.svelte";
+import JoinCustomRank from "../../components/JoinCustomRank.svelte";
+
+import featureImage from "../../assets/configurable_joins_venn_diagram.png";
+
+const frontmatter = {
+    title: "Mental Models of Slate: Configurable Joins",
+    description:
+        "Understand Slate Configurable Joins queries with this explainer on the basics of joining related data",
+    pubDate: "2025-10-20",
+    image: featureImage,
+    alt: "A venn diagram in the style of SQL illustrations",
+    showTestimonial: true,
+};
+---
+
+<ArticleLayout {frontmatter}>
+    <p>
+        <em>
+            This is the first in a new series of articles on helpful <strong
+                >mental models</strong
+            >
+            for learning Slate. This series is designed for users who are new to
+            Slate or taking on a new role, and who want to better understand what's
+            happening behind the scenes. With the right mental models, you'll become
+            a more effective troubleshooter, develop good instincts for how the tools
+            work, and make better informed decisions when building in Slate.
+        </em>
+    </p>
+
+    <h2>Part I: The Basics of Joins</h2>
+    <p>
+        If you're new to queries in Slate and wondering about the idea of
+        related data, when to join, why you need to join, which join to choose,
+        or why you're not seeing the results you expect, this article is for
+        you. When I lead trainings on Configurable Joins, I find there are
+        certain examples that help make CJs "click" for people, especially if
+        they can interact directly with some sample records. The interactive
+        explainers below will introduce you to the first of those examples,
+        about the basics of joins and related data.
+    </p>
+    <h3>Viewing Related Data on Record Tabs</h3>
+    <p>
+        When you're working with individual records in Slate, you're able to
+        toggle between their tabs and subtabs to see detailed information about
+        their applications, addresses, schools, and more.
+    </p>
+    <p>
+        Here's a simplified interface looking at the person records for four
+        students. You can toggle to a different person and click on their
+        subtabs to see their <strong>related data</strong>:
+    </p>
+    <section class="full-bleed">
+        <ProfileViewExplainer client:visible />
+    </section>
+    <p>
+        Some students have <em>one</em> related school record, while others (like
+        Liam) have <em>multiple</em>.
+    </p>
+
+    <h3>Picturing Related Data as Lists</h3>
+    <p>
+        One of the basic mental models for querying in Slate is to start
+        picturing related data as lists.
+    </p>
+    <p>
+        We could make a list for each person (Olivia's schools, Liam's schools).
+        Or, we could make a single list of everyone's schools.
+    </p>
+    <p>
+        Here's what it would look like to arrange the related data from our
+        subtabs as lists for each student, and then as consolidated lists for
+        all four people:
+    </p>
+
+    <section class="full-bleed">
+        <ListViewExplainer client:visible />
+    </section>
+    <p>
+        These lists are our <strong>query bases</strong>, the starting point for
+        any query. When building a new query, we tell Slate which list we want
+        to use as the base of the query.
+    </p>
+
+    <h3>Bringing in Related Data Using Joins</h3>
+    <p>
+        If we choose a Person query base, by default we already have all person
+        data available to use as exports or filters, but we won't have any
+        related data from the other subtabs until we add a join.
+    </p>
+    <p>
+        Let's see what that looks like at the individual record level, for both
+        Olivia and Liam:
+    </p>
+    <section class="full-bleed">
+        <JoinExplainer client:visible />
+    </section>
+    <p>
+        By joining to the schools table or the address table, we make those
+        fields available for use in our query.
+    </p>
+    <p>
+        But, in the example above, Liam has two schools. Our 'Join' button
+        doesn't make <em>all</em> of his schools available, only <em
+            >one specific school</em
+        >. Each join only brings in one row from the related list.
+    </p>
+    <p>
+        If we want to bring in more than one school, we need to add more than
+        one join, and we need to tell Slate which school to bring in for each
+        join.
+    </p>
+
+    <h3>Why Joins Use Rank</h3>
+    <p>
+        Out of the box, Slate provides standard joins to bring in each of the
+        related rows based on rank.
+    </p>
+    <p>
+        Rank is Slate's way of putting someone's list of schools or addresses in
+        sort order, where the rank 1 school is the top school, the rank 2 is the
+        next school and so on (if you're ever curious, there's a detailed
+        explanation for how Slate ranks each table in the Knowledge Base article
+        on <a
+            href="https://knowledge.technolutions.net/docs/database-structure-determination-of-table-ranks#school"
+            target="_blank">Determination of Table Ranks</a
+        >).
+    </p>
+    <p>
+        Now, if we look at Liam, we can pick either his Rank 1 or his Rank 2
+        school and make those available to the query:
+    </p>
+    <section class="full-bleed">
+        <JoinExplainerRanked client:visible />
+    </section>
+
+    <p>
+        But the actual query interface in Slate includes more options. Which
+        option do we actually want?
+    </p>
+
+    <h3>Custom Joins vs. Standard Rank Joins</h3>
+    <p>
+        The query tool lets us join using the default rank or a custom rank,
+        when we don't want to use Slate's default sort order.
+    </p>
+    <ul>
+        <li>
+            Rank: Options like <strong>School by Rank Overall</strong> or <strong
+                >School by Level of Study, Rank</strong
+            >
+        </li>
+        <li>Custom: Options like <strong>Schools</strong></li>
+    </ul>
+    <p>
+        In each case, the join needs to be <em>configured</em> to tell Slate <em
+            >which row we want</em
+        >.
+    </p>
+    <p>
+        Here's the final version of the simplified interface that's closer to
+        how the query tool actually presents join options. You can click 'Add
+        Join' and choose whether you want the default rank join (and enter which
+        rank number you want) or a custom rank (where you tell Slate how you
+        want to sort instead).
+    </p>
+    <section class="full-bleed">
+        <JoinCustomRank client:visible />
+    </section>
+    <p>
+        Of course, in the query tool, we're working with a list of records. We
+        don't join to Olivia's rank 1 school and separately to Liam's rank 1
+        school: we add our joins to the query overall, which tells Slate "For
+        each record in our results, bring in data from the rank 1 school, if it
+        exists." To reflect this, the simplified interface now shows joins
+        persisting if you toggle between records. If a record doesn't have a row
+        with that rank, the join will be grayed out.
+    </p>
+
+    <p>
+        We can add and remove as many joins as we want, including (if we're not
+        careful) adding joins that bring in the same data multiple times. This
+        is one of the most common errors new users make when building queries:
+        they'll add a join from Person to Schools, then, under 'Extended
+        Exports', search for a field like Level of Study and accidentally add a
+        new join, even though they already had access to the data.
+    </p>
+    <h3>Takeaways</h3>
+    <p>
+        When you're starting out with queries, it can be helpful to start by
+        picturing the tabs and subtabs on a record that you want to include,
+        then imagine what those tabs would look like if they were lists. How do
+        you want to interact with those lists, and which list do you want to use
+        as the base of your query?
+    </p>
+    <p>
+        In a query, you're telling Slate what you want it to do for each record:
+        if someone has multiple schools or addresses, which one should be
+        brought in so you can use it for exports and filters?
+    </p>
+    <p>
+        Each join only brings in one row. If you want to include columns for
+        both rank 1 school name and rank 2 school name, you need to add separate
+        joins, and you need to configure those joins by adding the rank number
+        or a custom sort order (tip: you almost always want to use the default
+        rank joins, not custom).
+    </p>
+    <p>
+        When you're adding a new field, you can check whether it's already
+        available by looking at 'Direct Exports', which is similar to the
+        'Available Data' window in our examples above. Adding a join makes new
+        fields available in that 'Direct Exports' section. You should only pick
+        from 'Extended Exports' if a field is not yet available.
+    </p>
+    <p>
+        With these basics in mind, you'll be able to join successfully to
+        related data, pulling in precisely the rows you need.
+    </p>
+</ArticleLayout>
+
+<style>
+    .full-bleed {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 1rem;
+    }
+</style>

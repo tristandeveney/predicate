@@ -1,5 +1,6 @@
 ---
 import click_depth from "../assets/click_depth.png";
+import venn from "../assets/configurable_joins_venn_diagram.png";
 import mobile_branding_example from "../assets/mobile_branding_example.png";
 import form_questions from "../assets/form-questions.png";
 ---
@@ -8,7 +9,29 @@ import form_questions from "../assets/form-questions.png";
     <div class="container">
         <h2 class="centered-heading fade-in">INSIGHTS & RESOURCES</h2>
         <div class="insights-grid">
-             <article
+            <article
+                class="insight-card fade-in"
+                style="transition-delay: 0.2s;"
+            >
+                <div
+                    class="card-visual"
+                    style={`background-image: url('${venn.src}');`}
+                >
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">Explainer</span>
+                    <h3>
+                        <a
+                            href="/articles/explaining-configurable-joins-part-i/"
+                        >
+                            Mental Models of Slate: Configurable Joins Part I,
+                            the Basics of Joins
+                        </a>
+                    </h3>
+                    <p class="read-more">Read More &rarr;</p>
+                </div>
+            </article>
+            <article
                 class="insight-card fade-in"
                 style="transition-delay: 0.2s;"
             >
@@ -21,7 +44,8 @@ import form_questions from "../assets/form-questions.png";
                     <span class="card-tag">Article</span>
                     <h3>
                         <a href="/articles/form-questions-2025/">
-                            2025 Inquiry Form Benchmarks: An In-Depth Look at 750+ Slate Schools
+                            2025 Inquiry Form Benchmarks: An In-Depth Look at
+                            750+ Slate Schools
                         </a>
                     </h3>
                     <p class="read-more">Read More &rarr;</p>
@@ -42,26 +66,6 @@ import form_questions from "../assets/form-questions.png";
                         <a href="/articles/click-depth/">
                             How Many Clicks to Inquire? New 2025 Data from
                             1,200+ College Websites
-                        </a>
-                    </h3>
-                    <p class="read-more">Read More &rarr;</p>
-                </div>
-            </article>
-            <article
-                class="insight-card fade-in"
-                style="transition-delay: 0.2s;"
-            >
-                <div
-                    class="card-visual"
-                    style={`background-image: url('${mobile_branding_example.src}');`}
-                >
-                </div>
-                <div class="card-content">
-                    <span class="card-tag">Article</span>
-                    <h3>
-                        <a href="/articles/mobile-branding/">
-                            Does Your Slate Mobile Branding Display Consistently
-                            on Every Device?
                         </a>
                     </h3>
                     <p class="read-more">Read More &rarr;</p>

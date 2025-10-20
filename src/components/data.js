@@ -1,0 +1,80 @@
+export const personData = [
+    { "id": 1, "name": "Olivia Chen", "email": "olivia.chen@example.com", "dob": "2004-08-12", "major": "Computer Science", "entryTerm": "Fall 2022", "createdDate": "2021-09-01T10:00:00Z" },
+    { "id": 2, "name": "Liam Taylor", "email": "liam.taylor@example.com", "dob": "2003-05-21", "major": "Mechanical Engineering", "entryTerm": "Fall 2021", "createdDate": "2020-10-15T11:20:00Z" },
+    { "id": 3, "name": "Sophia Martinez", "email": "sophia.martinez@example.com", "dob": "2004-11-02", "major": "Psychology", "entryTerm": "Fall 2022", "createdDate": "2021-11-05T09:30:00Z" },
+    { "id": 4, "name": "Noah Kim", "email": "noah.kim@example.com", "dob": "2005-01-30", "major": "Biology", "entryTerm": "Fall 2023", "createdDate": "2022-08-20T14:00:00Z" },
+    { "id": 5, "name": "Ava Nguyen", "email": "ava.nguyen@example.com", "dob": "2003-03-15", "major": "Business Administration", "entryTerm": "Spring 2022", "createdDate": "2021-04-10T16:45:00Z" },
+    { "id": 6, "name": "William Jackson", "email": "william.jackson@example.com", "dob": "2004-07-19", "major": "History", "entryTerm": "Fall 2022", "createdDate": "2021-09-12T11:00:00Z" },
+    { "id": 7, "name": "Sophia Martinez", "email": "sophia.martinez@example.com", "dob": "2005-02-25", "major": "English", "entryTerm": "Fall 2023", "createdDate": "2022-09-01T08:00:00Z" },
+    { "id": 8, "name": "James Brown", "email": "james.brown@example.com", "dob": "2003-09-05", "major": "Economics", "entryTerm": "Fall 2021", "createdDate": "2020-11-01T13:10:00Z" },
+    { "id": 9, "name": "Isabella Davis", "email": "isabella.davis@example.com", "dob": "2004-04-10", "major": "Political Science", "entryTerm": "Spring 2023", "createdDate": "2022-02-01T10:15:00Z" },
+    { "id": 10, "name": "Lucas Wilson", "email": "lucas.wilson@example.com", "dob": "2005-06-22", "major": "Computer Science", "entryTerm": "Fall 2023", "createdDate": "2022-10-02T18:00:00Z" },
+    { "id": 11, "name": "Mia Garcia", "email": "mia.garcia@example.com", "dob": "2003-12-08", "major": "Nursing", "entryTerm": "Fall 2021", "createdDate": "2020-12-15T12:00:00Z" },
+    { "id": 12, "name": "Henry Miller", "email": "henry.miller@example.com", "dob": "2004-10-14", "major": "Mechanical Engineering", "entryTerm": "Fall 2022", "createdDate": "2021-10-20T09:00:00Z" },
+    { "id": 13, "name": "Amelia Lopez", "email": "amelia.lopez@example.com", "dob": "2005-03-03", "major": "Psychology", "entryTerm": "Fall 2023", "createdDate": "2022-09-10T11:00:00Z" },
+    { "id": 14, "name": "Alexander Moore", "email": "alexander.moore@example.com", "dob": "2003-08-28", "major": "Biology", "entryTerm": "Spring 2022", "createdDate": "2021-03-15T14:30:00Z" },
+    { "id": 15, "name": "Charlotte Taylor", "email": "charlotte.taylor@example.com", "dob": "2004-02-18", "major": "Business Administration", "entryTerm": "Fall 2022", "createdDate": "2021-09-05T15:00:00Z" },
+    { "id": 16, "name": "Benjamin Anderson", "email": "benjamin.anderson@example.com", "dob": "2005-07-07", "major": "History", "entryTerm": "Fall 2023", "createdDate": "2022-11-11T11:11:00Z" },
+    { "id": 17, "name": "Evelyn Thomas", "email": "evelyn.thomas@example.com", "dob": "2003-01-11", "major": "English", "entryTerm": "Fall 2021", "createdDate": "2020-09-20T10:00:00Z" },
+    { "id": 18, "name": "Daniel White", "email": "daniel.white@example.com", "dob": "2004-06-01", "major": "Economics", "entryTerm": "Spring 2023", "createdDate": "2022-01-25T16:00:00Z" },
+    { "id": 19, "name": "Harper Harris", "email": "harper.harris@example.com", "dob": "2005-09-17", "major": "Political Science", "entryTerm": "Fall 2023", "createdDate": "2022-10-25T12:00:00Z" },
+    { "id": 20, "name": "Matthew Clark", "email": "matthew.clark@example.com", "dob": "2003-10-23", "major": "Computer Science", "entryTerm": "Fall 2021", "createdDate": "2020-11-30T17:00:00Z" }
+];
+
+export const applicationData = [
+    { "id": 101, "personId": 1, "major": "Computer Science", "term": "Fall 2025", "submittedDate": "2024-10-15", "createdDate": "2024-09-01T12:00:00Z" },
+    { "id": 102, "personId": 2, "major": "Mechanical Engineering", "term": "Fall 2025", "submittedDate": "2024-11-01", "createdDate": "2024-10-01T10:00:00Z" },
+    { "id": 103, "personId": 3, "major": "Neuroscience", "term": "Fall 2025", "submittedDate": "2024-09-28", "createdDate": "2024-09-10T11:00:00Z" },
+    { "id": 104, "personId": 4, "major": "Biology", "term": "Spring 2026", "submittedDate": "2025-01-05", "createdDate": "2024-12-01T14:00:00Z" },
+    { "id": 105, "personId": 5, "major": "Marketing", "term": "Fall 2025", "submittedDate": "2024-12-10", "createdDate": "2024-11-15T09:00:00Z" },
+    { "id": 106, "personId": 6, "major": "History", "term": "Fall 2025", "submittedDate": "2024-10-22", "createdDate": "2024-10-01T13:00:00Z" },
+    { "id": 107, "personId": 7, "major": "Creative Writing", "term": "Fall 2025", "submittedDate": "2024-11-18", "createdDate": "2024-11-01T15:00:00Z" },
+    { "id": 108, "personId": 8, "major": "Finance", "term": "Fall 2025", "submittedDate": "2024-10-30", "createdDate": "2024-10-10T18:00:00Z" },
+    { "id": 109, "personId": 9, "major": "Political Science", "term": "Fall 2025", "submittedDate": "2024-09-15", "createdDate": "2024-09-01T17:00:00Z" },
+    { "id": 110, "personId": 9, "major": "International Relations", "term": "Spring 2026", "submittedDate": "2025-01-10", "createdDate": "2025-01-02T10:00:00Z" },
+    { "id": 111, "personId": 10, "major": "Computer Science", "term": "Fall 2025", "submittedDate": "2024-12-01", "createdDate": "2024-11-20T11:30:00Z" },
+    { "id": 112, "personId": 10, "major": "Data Science", "term": "Fall 2025", "submittedDate": "2024-12-02", "createdDate": "2024-11-20T11:35:00Z" }
+];
+
+export const schoolData = [
+    { "id": 201, "personId": 1, "name": "Northwood High School", "code": "052405", "levelOfStudy": "High School", "createdDate": "2021-09-01T10:05:00Z" },
+    { "id": 202, "personId": 2, "name": "Lincoln East High School", "code": "281455", "levelOfStudy": "High School", "createdDate": "2020-10-15T11:25:00Z" },
+    { "id": 203, "personId": 2, "name": "Midland Community College", "code": "280721", "levelOfStudy": "College", "createdDate": "2023-08-01T09:00:00Z" },
+    { "id": 204, "personId": 3, "name": "Oakmont High School", "code": "052732", "levelOfStudy": "High School", "createdDate": "2021-11-05T09:35:00Z" },
+    { "id": 205, "personId": 4, "name": "Northwood High School", "code": "052405", "levelOfStudy": "High School", "createdDate": "2022-08-20T14:05:00Z" },
+    { "id": 206, "personId": 5, "name": "South Point High School", "code": "441015", "levelOfStudy": "High School", "createdDate": "2021-04-10T16:50:00Z" },
+    { "id": 207, "personId": 5, "name": "Austin Community College", "code": "440123", "levelOfStudy": "College", "createdDate": "2023-06-15T10:00:00Z" },
+    { "id": 208, "personId": 6, "name": "Oakmont High School", "code": "052732", "levelOfStudy": "High School", "createdDate": "2021-09-12T11:05:00Z" },
+    { "id": 209, "personId": 7, "name": "Lincoln East High School", "code": "281455", "levelOfStudy": "High School", "createdDate": "2022-09-01T08:05:00Z" },
+    { "id": 210, "personId": 8, "name": "Northwood High School", "code": "052405", "levelOfStudy": "High School", "createdDate": "2020-11-01T13:15:00Z" },
+    { "id": 211, "personId": 8, "name": "State University of New York", "code": "330987", "levelOfStudy": "College", "createdDate": "2024-01-20T11:00:00Z" },
+    { "id": 212, "personId": 9, "name": "South Point High School", "code": "441015", "levelOfStudy": "High School", "createdDate": "2022-02-01T10:20:00Z" },
+    { "id": 213, "personId": 10, "name": "Oakmont High School", "code": "052732", "levelOfStudy": "High School", "createdDate": "2022-10-02T18:05:00Z" },
+    { "id": 214, "personId": 11, "name": "Northwood High School", "code": "052405", "levelOfStudy": "High School", "createdDate": "2020-12-15T12:05:00Z" },
+    { "id": 215, "personId": 11, "name": "De Anza College", "code": "050881", "levelOfStudy": "College", "createdDate": "2023-09-01T14:00:00Z" },
+    { "id": 216, "personId": 12, "name": "Lincoln East High School", "code": "281455", "levelOfStudy": "High School", "createdDate": "2021-10-20T09:05:00Z" },
+    { "id": 217, "personId": 13, "name": "South Point High School", "code": "441015", "levelOfStudy": "High School", "createdDate": "2022-09-10T11:05:00Z" },
+    { "id": 218, "personId": 14, "name": "Northwood High School", "code": "052405", "levelOfStudy": "High School", "createdDate": "2021-03-15T14:35:00Z" },
+    { "id": 219, "personId": 15, "name": "Oakmont High School", "code": "052732", "levelOfStudy": "High School", "createdDate": "2021-09-05T15:05:00Z" },
+    { "id": 220, "personId": 16, "name": "Lincoln East High School", "code": "281455", "levelOfStudy": "High School", "createdDate": "2022-11-11T11:16:00Z" },
+    { "id": 221, "personId": 17, "name": "Northwood High School", "code": "052405", "levelOfStudy": "High School", "createdDate": "2020-09-20T10:05:00Z" },
+    { "id": 222, "personId": 18, "name": "South Point High School", "code": "441015", "levelOfStudy": "High School", "createdDate": "2022-01-25T16:05:00Z" },
+    { "id": 223, "personId": 19, "name": "Oakmont High School", "code": "052732", "levelOfStudy": "High School", "createdDate": "2022-10-25T12:05:00Z" },
+    { "id": 224, "personId": 20, "name": "Northwood High School", "code": "052405", "levelOfStudy": "High School", "createdDate": "2020-11-30T17:05:00Z" }
+];
+
+export const addressData = [
+    { "id": 301, "personId": 1, "type": "Permanent", "street": "123 Oak St", "city": "Sunnyvale", "state": "CA", "zip": "94086", "effectiveDate": "2010-01-01", "createdDate": "2021-09-01T10:01:00Z" },
+    { "id": 302, "personId": 2, "type": "Permanent", "street": "456 Maple Ave", "city": "Lincoln", "state": "NE", "zip": "68508", "effectiveDate": "2008-05-20", "createdDate": "2020-10-15T11:21:00Z" },
+    { "id": 303, "personId": 3, "type": "Permanent", "street": "789 Pine Ln", "city": "Roseville", "state": "CA", "zip": "95678", "effectiveDate": "2015-08-10", "createdDate": "2021-11-05T09:31:00Z" },
+    { "id": 304, "personId": 4, "type": "Permanent", "street": "101 Elm Ct", "city": "Sunnyvale", "state": "CA", "zip": "94087", "effectiveDate": "2012-03-15", "createdDate": "2022-08-20T14:01:00Z" },
+    { "id": 305, "personId": 5, "type": "Permanent", "street": "212 Birch Rd", "city": "Austin", "state": "TX", "zip": "78701", "effectiveDate": "2014-07-22", "createdDate": "2021-04-10T16:46:00Z" },
+    { "id": 306, "personId": 5, "type": "Mailing", "street": "800 W Cesar Chavez St", "city": "Austin", "state": "TX", "zip": "78701", "effectiveDate": "2023-08-15", "createdDate": "2023-08-15T09:15:00Z" },
+    { "id": 307, "personId": 6, "type": "Permanent", "street": "333 Cedar Blvd", "city": "Roseville", "state": "CA", "zip": "95661", "effectiveDate": "2011-11-01", "createdDate": "2021-09-12T11:01:00Z" },
+    { "id": 308, "personId": 7, "type": "Permanent", "street": "444 Spruce Way", "city": "Lincoln", "state": "NE", "zip": "68521", "effectiveDate": "2017-06-30", "createdDate": "2022-09-01T08:01:00Z" },
+    { "id": 309, "personId": 8, "type": "Permanent", "street": "555 Redwood Dr", "city": "Albany", "state": "NY", "zip": "12203", "effectiveDate": "2009-09-09", "createdDate": "2020-11-01T13:11:00Z" },
+    { "id": 310, "personId": 9, "type": "Permanent", "street": "654 Pine St", "city": "Austin", "state": "TX", "zip": "78704", "effectiveDate": "2018-01-01", "createdDate": "2022-02-01T10:16:00Z" },
+    { "id": 311, "personId": 10, "type": "Permanent", "street": "987 Oak Ave", "city": "Roseville", "state": "CA", "zip": "95747", "effectiveDate": "2019-02-15", "createdDate": "2022-10-02T18:01:00Z" },
+    { "id": 312, "personId": 11, "type": "Permanent", "street": "1212 Elm St", "city": "Sunnyvale", "state": "CA", "zip": "94085", "effectiveDate": "2010-08-01", "createdDate": "2020-12-15T12:01:00Z" },
+    { "id": 313, "personId": 11, "type": "Mailing", "street": "2121 De Anza Blvd", "city": "Cupertino", "state": "CA", "zip": "95014", "effectiveDate": "2023-09-01", "createdDate": "2023-09-01T14:05:00Z" }
+];
