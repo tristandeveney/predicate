@@ -17,7 +17,7 @@ const { title, description, pubDate, image, alt, showTestimonial } =
 
 // Creates the absolute image URL needed for social media cards
 const absoluteImageUrl = image
-    ? new URL(image, Astro.site).href
+    ? new URL(image.src, Astro.site).href
     : new URL("/default-social-image.png", Astro.site).href;
 ---
 
