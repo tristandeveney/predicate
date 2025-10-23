@@ -1,76 +1,70 @@
 ---
-import click_depth from "../assets/click_depth.png";
-import venn from "../assets/configurable_joins_venn_diagram.png";
-import mobile_branding_example from "../assets/mobile_branding_example.png";
-import form_questions from "../assets/form-questions.png";
+interface InsightModule {
+    title: string;
+    pubDate: string;
+    image: any;
+    category: string;
+}
+
+const allInsightModules = import.meta.glob<InsightModule>(
+    "../pages/articles/*.astro",
+    {
+        eager: true,
+    },
+);
+
+const allInsights = Object.entries(allInsightModules).map(([path, module]) => {
+    const url = path
+        .replace("../pages/articles/", "/articles/")
+        .replace(".astro", "/");
+    return {
+        url: url,
+        title: module.title,
+        pubDate: module.pubDate,
+        image: module.image,
+        category: module.category,
+    };
+});
+
+const publishedInsights = allInsights.filter((insight) => insight.pubDate);
+
+const sortedInsights = publishedInsights.sort(
+    (a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf(),
+);
+
+const latestInsights = sortedInsights.slice(0, 3);
 ---
 
 <section id="insights">
     <div class="container">
         <h2 class="centered-heading fade-in">INSIGHTS & RESOURCES</h2>
         <div class="insights-grid">
-            <article
-                class="insight-card fade-in"
-                style="transition-delay: 0.2s;"
-            >
-                <div
-                    class="card-visual"
-                    style={`background-image: url('${venn.src}');`}
-                >
-                </div>
-                <div class="card-content">
-                    <span class="card-tag">Explainer</span>
-                    <h3>
-                        <a
-                            href="/articles/explaining-configurable-joins-part-i/"
-                        >
-                            Mental Models of Slate: Configurable Joins Part I,
-                            the Basics of Joins
-                        </a>
-                    </h3>
-                    <p class="read-more">Read More &rarr;</p>
-                </div>
-            </article>
-            <article
-                class="insight-card fade-in"
-                style="transition-delay: 0.2s;"
-            >
-                <div
-                    class="card-visual"
-                    style={`background-image: url('${form_questions.src}');`}
-                >
-                </div>
-                <div class="card-content">
-                    <span class="card-tag">Article</span>
-                    <h3>
-                        <a href="/articles/form-questions-2025/">
-                            2025 Inquiry Form Benchmarks: An In-Depth Look at
-                            750+ Slate Schools
-                        </a>
-                    </h3>
-                    <p class="read-more">Read More &rarr;</p>
-                </div>
-            </article>
-            <article
-                class="insight-card fade-in"
-                style="transition-delay: 0.2s;"
-            >
-                <div
-                    class="card-visual"
-                    style={`background-image: url('${click_depth.src}');`}
-                >
-                </div>
-                <div class="card-content">
-                    <span class="card-tag">Article</span>
-                    <h3>
-                        <a href="/articles/click-depth/">
-                            How Many Clicks to Inquire? New 2025 Data from
-                            1,200+ College Websites
-                        </a>
-                    </h3>
-                    <p class="read-more">Read More &rarr;</p>
-                </div>
-            </article>
+            {
+                latestInsights.map((insight, index) => (
+                    <article
+                        class="insight-card fade-in"
+                        style={`transition-delay: ${index * 0.1}s;`}
+                    >
+                        <div
+                            class="card-visual"
+                            style={`background-image: url('${insight.image.src}');`}
+                        ></div>
+                        <div class="card-content">
+                            <span class="card-tag">
+                                {insight.category || "Article"}
+                            </span>
+                            <h3>
+                                <a href={insight.url}>{insight.title}</a>
+                            </h3>
+                            <p class="read-more">Read More &rarr;</p>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="/insights/" class="btn btn-primary">View All Insights</a>
         </div>
     </div>
 </section>

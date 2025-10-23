@@ -12,13 +12,15 @@ import "../../styles/charts.css";
 import { chartData } from "../../data/rfi-analysis-data.js";
 
 // --- Page-Specific SEO & Content Data ---
-const title =
+export const title =
     "How Many Clicks to Inquire? New 2025 Data from 1,200+ College Websites";
-const description =
-    "How many clicks does it take for a prospective student to request information? We analyzed over 1,200 college websites to establish benchmarks for RFI form accessibility.";
-const pubDate = "2025-09-19";
-const image = click_depth_chart;
-const alt = "An illustration of a Request Info button with a question mark";
+export const description =
+    "How many clicks does it take for a prospective student to request...";
+export const pubDate = "2025-09-19";
+export const image = click_depth_chart;
+export const alt =
+    "An illustration of a Request Info button with a question mark";
+export const category = "Article";
 
 const absoluteImageUrl = new URL(image.src, Astro.site).href;
 

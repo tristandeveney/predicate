@@ -19,14 +19,15 @@ import {
 } from "../../data/form-analysis-data.js";
 
 // --- Page-Specific SEO & Content Data ---
-const title =
+export const title =
     "2025 Inquiry Form Benchmarks: An In-Depth Look at 750+ Slate Schools";
-const description =
-    "A deep dive into common inquiry form practices, from average length and common questions to UX choices and consent language. See how your RFI form compares to national benchmarks.";
-const pubDate = "2025-10-01";
-const image = click_depth_chart;
-const alt =
+export const description =
+    "A deep dive into common inquiry form practices, from average length...";
+export const pubDate = "2025-10-01";
+export const image = click_depth_chart;
+export const alt =
     "An illustration representing data analysis of college inquiry forms.";
+export const category = "Article";
 const absoluteImageUrl = new URL(image.src, Astro.site).href;
 ---
 
@@ -514,15 +515,30 @@ const absoluteImageUrl = new URL(image.src, Astro.site).href;
                     <p>
                         While every institution takes its own approach to
                         collecting inquiry data, it's important to understand
-                        the evolving practices of your peer institutions and to regularly review how your own approach compares.</p> 
-                    <p> A great inquiry form experience remains centered on the student: asking only what's needed to spark further discussion and build a relationship. Reducing the friction students experience in filling out your inquiry forms is our goal with this analysis, whether that involves cutting a few fields, changing how you're
+                        the evolving practices of your peer institutions and to
+                        regularly review how your own approach compares.
+                    </p>
+                    <p>
+                        A great inquiry form experience remains centered on the
+                        student: asking only what's needed to spark further
+                        discussion and build a relationship. Reducing the
+                        friction students experience in filling out your inquiry
+                        forms is our goal with this analysis, whether that
+                        involves cutting a few fields, changing how you're
                         collecting a key data point, or giving users an
-                        experience that adapts to their preferences. </p><p>As you discuss your form questions with your team, we hope this analysis helps guide those conversations toward a student experience that is intentional and focused on building great relationships.
+                        experience that adapts to their preferences.
+                    </p><p>
+                        As you discuss your form questions with your team, we
+                        hope this analysis helps guide those conversations
+                        toward a student experience that is intentional and
+                        focused on building great relationships.
                     </p>
                     <em
-                        >Looking for direction around your Slate data collection and reporting? Reach out to
-                       <a href="mailto:info@predicatehighered.com"
-                                >info@predicatehighered.com</a> to discuss how we can help.</em
+                        >Looking for direction around your Slate data collection
+                        and reporting? Reach out to
+                        <a href="mailto:info@predicatehighered.com"
+                            >info@predicatehighered.com</a
+                        > to discuss how we can help.</em
                     >
 
                     <AuthorBlock />

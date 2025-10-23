@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Contact from "../components/Contact.astro";
+
+interface InsightModule {
+    title: string;
+    pubDate: string;
+    image: any;
+    category: string;
+}
+
+const allInsightModules = import.meta.glob<InsightModule>(
+    "./articles/*.astro",
+    {
+        eager: true,
+    },
+);
+
+const allInsights = Object.entries(allInsightModules).map(([path, module]) => {
+    const url = path
+        .replace("./articles/", "/articles/")
+        .replace(".astro", "/");
+    return {
+        url: url,
+        title: module.title,
+        pubDate: module.pubDate,
+        image: module.image,
+        category: module.category,
+    };
+});
+
+const publishedInsights = allInsights.filter((insight) => insight.pubDate);
+
+const sortedInsights = publishedInsights.sort(
+    (a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf(),
+);
+---
+
+<Layout
+    title="Insights & Resources | Predicate Higher Ed"
+    description="Explore articles, explainers, and white papers on Slate..."
+>
+    <Header />
+    <main>
+        <section class="page-hero fade-in">
+            <div class="narrow-container">
+                <h1>Insights & Resources</h1>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="insights-grid">
+                    {
+                        sortedInsights.map((insight) => (
+                            <article class="insight-card">
+                                <div
+                                    class="card-visual"
+                                    style={`background-image: url('${insight.image.src}');`}
+                                ></div>
+                                <div class="card-content">
+                                    <span class="card-tag">
+                                        {insight.category || "Article"}
+                                    </span>
+                                    <h3>
+                                        <a href={insight.url}>
+                                            {insight.title}
+                                        </a>
+                                    </h3>
+                                    <p class="read-more">Read More &rarr;</p>
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+        <Contact />
+    </main>
+</Layout>
+<Footer />

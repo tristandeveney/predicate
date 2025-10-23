@@ -10,15 +10,14 @@ import AuthorBlock from "../../components/AuthorBlock.astro";
 import "../../styles/global.css";
 
 // --- Page-Specific SEO & Content Data ---
-const title =
+export const title =
     "Does Your Slate Mobile Branding Display Consistently on Every Device?";
-const description =
-    "1 in 10 colleges display a 'default grey' header on Slate-hosted mobile pages. We explain the configuration and testing to ensure your brand is consistent on every device.";
-const pubDate = "2025-09-09";
-const image = mobile_branding_example;
-const alt =
-    "An example of inconsistent CRM mobile branding in Slate, showing a generic grey header instead of a university's custom branding.";
-
+export const description =
+    "1 in 10 colleges display a 'default grey' header on Slate-hosted...";
+export const pubDate = "2025-09-09";
+export const image = mobile_branding_example;
+export const alt = "An example of inconsistent CRM mobile branding in Slate...";
+export const category = "Article";
 const absoluteImageUrl = new URL(image.src, Astro.site).href;
 ---
 

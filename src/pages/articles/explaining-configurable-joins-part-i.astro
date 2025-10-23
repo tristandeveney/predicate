@@ -9,14 +9,23 @@ import JoinCustomRank from "../../components/JoinCustomRank.svelte";
 
 import featureImage from "../../assets/configurable_joins_venn_diagram.png";
 
+// --- Page-Specific SEO & Content Data ---
+export const title = "Mental Models of Slate: Configurable Joins";
+export const description =
+    "Understand Slate Configurable Joins queries with this explainer...";
+export const pubDate = "2025-10-20";
+export const image = featureImage;
+export const alt = "A venn diagram in the style of SQL illustrations";
+export const category = "Explainer";
+const showTestimonial = true;
+
 const frontmatter = {
-    title: "Mental Models of Slate: Configurable Joins",
-    description:
-        "Understand Slate Configurable Joins queries with this explainer on the basics of joining related data",
-    pubDate: "2025-10-20",
-    image: featureImage,
-    alt: "A venn diagram in the style of SQL illustrations",
-    showTestimonial: true,
+    title: title,
+    description: description,
+    pubDate: pubDate,
+    image: image,
+    alt: alt,
+    showTestimonial: showTestimonial,
 };
 ---
 
