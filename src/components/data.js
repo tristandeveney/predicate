@@ -44,6 +44,7 @@ export const schoolData = [
     { "id": 205, "personId": 4, "name": "Northwood High School", "code": "052405", "levelOfStudy": "High School", "createdDate": "2022-08-20T14:05:00Z" },
     { "id": 206, "personId": 5, "name": "South Point High School", "code": "441015", "levelOfStudy": "High School", "createdDate": "2021-04-10T16:50:00Z" },
     { "id": 207, "personId": 5, "name": "Austin Community College", "code": "440123", "levelOfStudy": "College", "createdDate": "2023-06-15T10:00:00Z" },
+    { "id": 225, "personId": 5, "name": "Dickinson College", "code": "980993", "levelOfStudy": "College", "createdDate": "2023-06-15T10:00:00Z" },
     { "id": 208, "personId": 6, "name": "Oakmont High School", "code": "052732", "levelOfStudy": "High School", "createdDate": "2021-09-12T11:05:00Z" },
     { "id": 209, "personId": 7, "name": "Lincoln East High School", "code": "281455", "levelOfStudy": "High School", "createdDate": "2022-09-01T08:05:00Z" },
     { "id": 210, "personId": 8, "name": "Northwood High School", "code": "052405", "levelOfStudy": "High School", "createdDate": "2020-11-01T13:15:00Z" },

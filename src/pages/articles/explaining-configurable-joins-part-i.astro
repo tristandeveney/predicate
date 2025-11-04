@@ -10,7 +10,7 @@ import JoinCustomRank from "../../components/JoinCustomRank.svelte";
 import featureImage from "../../assets/configurable_joins_venn_diagram.png";
 
 // --- Page-Specific SEO & Content Data ---
-export const title = "Mental Models of Slate: Configurable Joins";
+export const title = "Configurable Joins: The Basics of Joins";
 export const description =
     "Understand Slate Configurable Joins queries with this explainer on the basics of joining related data";
 export const pubDate = "2025-10-20";
@@ -18,6 +18,7 @@ export const image = featureImage;
 export const alt = "A venn diagram in the style of SQL illustrations";
 export const category = "Explainer";
 const showTestimonial = true;
+export const hidePageHeader = true;
 
 const frontmatter = {
     title: title,
@@ -26,10 +27,24 @@ const frontmatter = {
     image: image,
     alt: alt,
     showTestimonial: showTestimonial,
+    hidePageHeader: hidePageHeader,
 };
 ---
 
 <ArticleLayout {frontmatter}>
+    <h3>Mental Models of Slate</h3>
+    <h1>Configurable Joins: The Basics of Joins</h1>
+    <p class="article-meta">
+        Published on {
+            new Date(pubDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                timeZone: "UTC",
+            })
+        }
+    </p>
+
     <p>
         <em>
             This is the first in a new series of articles on helpful <strong
@@ -42,8 +57,6 @@ const frontmatter = {
             work, and make better informed decisions when building in Slate.
         </em>
     </p>
-
-    <h2>Part I: The Basics of Joins</h2>
     <p>
         If you're new to queries in Slate and wondering about the idea of
         related data, when to join, why you need to join, which join to choose,
@@ -230,6 +243,19 @@ const frontmatter = {
     <p>
         With these basics in mind, you'll be able to join successfully to
         related data, pulling in precisely the rows you need.
+    </p>
+    <p>
+        <em
+            >Ready to explore the concept of subquery exports? Check out the
+            article on <a href="/articles/configurable-joins-subquery-exports/"
+                >The Basics of Subquery Exports</a
+            >. If you're finding this series on Mental Models of Slate useful
+            but you're looking for additional training or live working sessions
+            over Zoom on Configurable Joins, reach out to
+            <a href="mailto:info@predicatehighered.com"
+                >info@predicatehighered.com</a
+            > to discuss whether we might be a good fit.</em
+        >
     </p>
 </ArticleLayout>
 

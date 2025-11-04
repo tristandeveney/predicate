@@ -12,8 +12,15 @@ import { Image } from "astro:assets";
 
 // Defines the props this layout expects from each article's frontmatter
 const { frontmatter } = Astro.props;
-const { title, description, pubDate, image, alt, showTestimonial } =
-    frontmatter;
+const {
+    title,
+    description,
+    pubDate,
+    image,
+    alt,
+    showTestimonial,
+    hidePageHeader,
+} = frontmatter;
 
 // Creates the absolute image URL needed for social media cards
 const absoluteImageUrl = image
@@ -65,16 +72,24 @@ const absoluteImageUrl = image
                     />
                 </div>
                 <div class="article-content">
-                    <h1>{title}</h1>
-                    <p class="article-meta">
-                        Published on {
-                            new Date(pubDate).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                            })
-                        }
-                    </p>
+                    {
+                        !hidePageHeader && (
+                            <>
+                                <h1>{title}</h1>
+                                <p class="article-meta">
+                                    Published on{" "}
+                                    {new Date(pubDate).toLocaleDateString(
+                                        "en-US",
+                                        {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        },
+                                    )}
+                                </p>
+                            </>
+                        )
+                    }
 
                     {
                         /* The article's main content from the Markdown file goes here */
