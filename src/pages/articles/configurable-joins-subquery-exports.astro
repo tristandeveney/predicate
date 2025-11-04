@@ -1,0 +1,237 @@
+---
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+
+import BaseSelector from "../../components/BaseSelector.svelte";
+import SubqueryBase from "../../components/SubqueryBase.svelte";
+import SubqueryExportswithFilters from "../../components/SubqueryExportsWithFilters.svelte";
+
+import featureImage from "../../assets/subquery_icon.png";
+
+// --- Page-Specific SEO & Content Data ---
+export const title = "Configurable Joins: The Basics of Subquery Exports";
+export const description =
+    "Understand Slate Configurable Joins queries with this explainer on the basics of subquery exports on related data";
+export const pubDate = "2025-11-03";
+export const image = featureImage;
+export const alt =
+    "Illustration of a subquery with one row connected to two related rows";
+export const category = "Explainer";
+const showTestimonial = true;
+export const hidePageHeader = true;
+
+const frontmatter = {
+    title: title,
+    description: description,
+    pubDate: pubDate,
+    image: image,
+    alt: alt,
+    showTestimonial: showTestimonial,
+    hidePageHeader: hidePageHeader,
+};
+---
+
+<ArticleLayout {frontmatter}>
+    <h3>Mental Models of Slate</h3>
+    <h1>Configurable Joins: The Basics of Subquery Exports</h1>
+    <p class="article-meta">
+        Published on {
+            new Date(pubDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                timeZone: "UTC",
+            })
+        }
+    </p>
+
+    <p>
+        <em>
+            This is the second in a new series of articles on helpful <strong
+                >mental models</strong
+            >
+            for learning Slate. The first article, on
+            <a href="/articles/explaining-configurable-joins-part-i/"
+                >The Basics of Joins</a
+            >, is the best place to get started. This series is designed for
+            users who are new to Slate or taking on a new role, and who want to
+            better understand what's happening behind the scenes. With the right
+            mental models, you'll become a more effective troubleshooter,
+            develop good instincts for how the tools work, and make better
+            informed decisions when building in Slate.
+        </em>
+    </p>
+
+    <p>
+        One of the key concepts from <a
+            href="/articles/explaining-configurable-joins-part-i/"
+            >The Basics of Joins</a
+        > was that an overall join only ever picks one specific row from the joined
+        table. In this article, we'll explore <strong>subqueries</strong>, which
+        let you work with multiple rows at a time.
+    </p>
+
+    <h3>Building Queries on Other Bases</h3>
+    <p>
+        If this is the first time you're encountering subqueries, you might be
+        wondering, "Is a subquery actually a query?" Or, "How does a subquery
+        relate to a regular query?"
+    </p>
+
+    <p>
+        For your mental model of what a subquery is, it helps to imagine a
+        separate query, likely built on a different query base from your main
+        query. You can use the results of this separate query inside your main
+        query.
+    </p>
+    <p>
+        To see why we might want to do that, let's look at a simplified query
+        interface for some of those other bases. If you click 'Start New Query'
+        below, this interactive tool will prompt you to choose your query base,
+        similar to how Slate would. Give it a try, and use the 'New Query'
+        button to switch to a few new queries on different bases.
+    </p>
+    <p>
+        As before, we still have our preview of Available Data for a specific
+        record at the top, but now we also have a query interface where you can
+        drag over those data fields as exports and preview results.
+    </p>
+    <section class="full-bleed">
+        <BaseSelector client:visible />
+    </section>
+    <p>
+        Notice that you're able to filter by Person ID in the interactive above.
+        If you start on a base other than Person, you have to first add the join
+        to Person to make the connection. There's no choice here for rank,
+        because the examples I've included are all for tables that only relate
+        back to one specific person record.
+    </p>
+    <p>
+        If you choose to option to create a New Query for Schools, and you add a
+        filter for a specific person ID (like ID 2), the only schools returned
+        in a school query will be those belonging to that Person ID (ID 2 =
+        Liam).
+    </p>
+
+    <p>
+        For any of these queries, you'll see that we have a <strong>
+            Matching Row count</strong
+        > that updates based on your filter. What if we wanted to include that count,
+        for example of how many schools someone has, as a column export in our query
+        for person records? That's a typical use case for a subquery export.
+    </p>
+
+    <h3>One Query Inside Another</h3>
+
+    <p>
+        Adding a subquery is a bit like saying, go and run this separate mini
+        query once for each row in our main query. For the first person in our
+        person query, run the query for schools filtering for person ID = 1. For
+        the second row, run the query for schools, but this time, filter for
+        person ID = 2, all the way down the list. Our subquery export column
+        would output the matching row count for each student.
+    </p>
+    <p>
+        If that mini query ran for Liam, the matching row count of schools would
+        be 2. If it ran for Olivia, the matching row count would be 1.
+    </p>
+
+    <p>
+        Let's give that a try. On the Person query belong, drag over the
+        'Aggregate Count' subquery export and follow the prompts to choose what
+        should be counted for each person row (in other words, what query base
+        should we build our mini query on, filtering for person = this row)
+    </p>
+    <section class="full-bleed">
+        <SubqueryBase client:visible />
+    </section>
+    <p>
+        The rows being counted in this example will be marked with a dot that
+        matches the subquery export label.
+    </p>
+    <p>
+        You'll notice that the subquery is completely separate from any joins
+        that we add to the query overall. We can have a subquery for a count of
+        schools without joining to the rank 1 school, or we could add our joins
+        and still have our subquery count.
+    </p>
+    <p>
+        One difference between this simplified query tool and Slate is that an
+        actual subquery export in Slate does not have a simple dropdown for
+        Subquery Base. Instead, Slate accomplishes the same thing using a join.
+    </p>
+    <p>
+        The Slate equivalent is adding a subquery export and choosing the join
+        to "Schools" (plural, indicating this is one-to-many) inside the
+        subquery. Unlike in the join interface for the main query, inside of a
+        subquery export, this plural version of the join <em>does</em> join to multiple
+        rows at once. The dot in our simplified example is indicating which of those
+        rows are being joined by that one-to-many join in the subquery.
+    </p>
+    <h3>Filtering the Subquery Export</h3>
+
+    <p>
+        What if we didn't want to count all of a person's schools, however? Say
+        we start on schools and want to filter the list only to those where
+        level of study is College:
+    </p>
+
+    <section class="full-bleed">
+        <SubqueryExportswithFilters client:only="svelte" />
+    </section>
+
+    <p>
+        In the same way that we can add filters on this query for schools, we
+        can add filters inside our subquery. If you start a New Query for
+        person, the subquery export for schools now allows you to filter the
+        results to only get the matching row count for schools of the selected
+        level of study.
+    </p>
+    <p>
+        For someone like Ava, person ID 5, we could add subquery exports that
+        count all of her schools (3), only her colleges (2), or only her high
+        schools (1).
+    </p>
+
+    <h3>Takeaways</h3>
+    <p>
+        You can imagine a subquery as a special mini query that you run multiple
+        times inside of your main query, once for every row. This is
+        accomplished using a join, which is what connects the row of the main
+        query (the person ID) to the rows that shoudl be counted on the table
+        being joined. If you ever have a subquery that you need to troubleshoot,
+        it can help to start a new regular query on the relevant base and
+        recreate the filters of your subquery. You should see the same matching
+        row counts.
+    </p>
+    <p>
+        Because the subquery gives you query results for each row, you can then
+        use those results in your main query. Subquery exports are often used to
+        aggregate information about related data, like counting the number of
+        schools that someone has. You could either count all of their schools,
+        or apply filters within the subquery to count only schools that meet
+        certain criteria.
+    </p>
+
+    <p>
+        <em
+            >Need to review concepts about joins? Check out the article on <a
+                href="/articles/explaining-configurable-joins-part-i"
+                >The Basics of Joins</a
+            >. If you're finding this series on Mental Models of Slate useful
+            but you're looking for additional training or live working sessions
+            over Zoom on Configurable Joins, reach out to
+            <a href="mailto:info@predicatehighered.com"
+                >info@predicatehighered.com</a
+            > to discuss whether we might be a good fit.</em
+        >
+    </p>
+</ArticleLayout>
+<style>
+    .full-bleed {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 1rem;
+    }
+</style>
