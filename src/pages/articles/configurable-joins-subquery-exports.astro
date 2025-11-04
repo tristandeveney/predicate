@@ -106,8 +106,8 @@ const frontmatter = {
         back to one specific person record.
     </p>
     <p>
-        If you choose to option to create a New Query for Schools, and you add a
-        filter for a specific person ID (like ID 2), the only schools returned
+        If you choose the option to create a New Query for Schools, and you add
+        a filter for a specific person ID (like ID 2), the only schools returned
         in a school query will be those belonging to that Person ID (ID 2 =
         Liam).
     </p>
@@ -136,7 +136,7 @@ const frontmatter = {
     </p>
 
     <p>
-        Let's give that a try. On the Person query belong, drag over the
+        Let's give that a try. On the Person query below, drag over the
         'Aggregate Count' subquery export and follow the prompts to choose what
         should be counted for each person row (in other words, what query base
         should we build our mini query on, filtering for person = this row)
@@ -189,7 +189,9 @@ const frontmatter = {
     <p>
         For someone like Ava, person ID 5, we could add subquery exports that
         count all of her schools (3), only her colleges (2), or only her high
-        schools (1).
+        schools (1). If we include multiple subquery exports, the preview
+        interface at the top will let you hover over the labeled subquery to see
+        the highlighted rows that are being counted for each.
     </p>
 
     <h3>Takeaways</h3>
@@ -197,11 +199,12 @@ const frontmatter = {
         You can imagine a subquery as a special mini query that you run multiple
         times inside of your main query, once for every row. This is
         accomplished using a join, which is what connects the row of the main
-        query (the person ID) to the rows that shoudl be counted on the table
-        being joined. If you ever have a subquery that you need to troubleshoot,
-        it can help to start a new regular query on the relevant base and
-        recreate the filters of your subquery. You should see the same matching
-        row counts.
+        query (the person ID) to the rows that should be counted on the table
+        being joined.
+    </p><p>
+        If you ever have a subquery that you need to troubleshoot, it can help
+        to start a new, regular query on the relevant base and recreate the
+        filters of your subquery. You should see the same matching row counts.
     </p>
     <p>
         Because the subquery gives you query results for each row, you can then
@@ -210,6 +213,13 @@ const frontmatter = {
         schools that someone has. You could either count all of their schools,
         or apply filters within the subquery to count only schools that meet
         certain criteria.
+    </p>
+    <p>
+        Of course, you can do many more things with those results beyond simply
+        counting: you can sum, average, create concatenations, use those
+        aggregates in formulas, and so much more. In addition to exporting those
+        results, you can also use those results to filter your main query, which
+        we'll explore in the next article.
     </p>
 
     <p>
