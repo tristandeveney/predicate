@@ -115,10 +115,11 @@ const frontmatter = {
         for Slate to know the results, it needs to run the query.
     </p>
     <p>
-        It's also important to keep in mind that the rules only run on records
-        that are updated. Whenever a record is created or updated in Slate, it's
-        entered into a queue, which means that Slate keeps track of the fact
-        that that record is awaiting processing because there was a change.
+        It's also important to keep in mind that the rules only apply actions to
+        records that are updated. Whenever a record is created or updated in
+        Slate, it's entered into a queue, which means that Slate keeps track of
+        the fact that that record is awaiting processing because there was a
+        change.
     </p><p>
         If there wasn't a change to the record, then (in theory) there shouldn't
         be a reason for the rules to run. Of course, when a rule itself is
@@ -159,7 +160,7 @@ const frontmatter = {
     <p>
         In that version, you also have to manually click the 'Run Batch Update'
         button. Of course, Slate is checking for updates automatically and
-        runnings rules a regular cadence, usually once every 15-20 minutes.
+        runnings rules on a regular cadence, usually once every 15-20 minutes.
     </p>
     <h3>Database Processing</h3>
 
