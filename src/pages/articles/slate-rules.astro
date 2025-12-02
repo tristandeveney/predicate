@@ -1,0 +1,232 @@
+---
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+
+import ExclusivityDemo from "../../components/exclusivitydemo.svelte";
+import UpdateQueue from "../../components/ruleswithupdatequeue.svelte";
+import FullQueue from "../../components/rulefullqueue.svelte";
+
+import featureImage from "../../assets/gears.png";
+
+// --- Page-Specific SEO & Content Data ---
+export const title = "Rule Processing in Slate";
+export const description =
+    "This interactive explainer demonstrates concepts like exclusivity groups and update queues, to help users understand rule processing in Slate.";
+export const pubDate = "2025-12-02";
+export const image = featureImage;
+export const alt =
+    "Illustration of two gears symbolizing the rules engine in Slate";
+export const category = "Explainer";
+const showTestimonial = true;
+export const hidePageHeader = true;
+
+const frontmatter = {
+    title: title,
+    description: description,
+    pubDate: pubDate,
+    image: image,
+    alt: alt,
+    showTestimonial: showTestimonial,
+    hidePageHeader: hidePageHeader,
+};
+---
+
+<ArticleLayout {frontmatter}>
+    <h3>Mental Models of Slate</h3>
+    <h1>Understanding Rule Processing in Slate</h1>
+    <p class="article-meta">
+        Published on {
+            new Date(pubDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                timeZone: "UTC",
+            })
+        }
+    </p>
+
+    <p>
+        <em>
+            This is the third in a new series of articles on helpful <strong
+                >mental models</strong
+            > for learning Slate. The first two articles covered concepts from Configurable
+            Joins, including
+            <a href="/articles/explaining-configurable-joins-part-i/"
+                >The Basics of Joins</a
+            > and <a href="/articles/configurable-joins-subquery-exports/"
+                >Subquery Exports</a
+            >. This series is designed for users who are new to Slate or taking
+            on a new role, and who want to better understand what's happening
+            behind the scenes. With the right mental models, you'll become a
+            more effective troubleshooter, develop good instincts for how the
+            tools work, and make better informed decisions when building in
+            Slate.
+        </em>
+    </p>
+
+    <p>
+        When rules are backlogged or just running slow in your Slate instance,
+        what is that you picture when you visualize what's happening?
+    </p><p>
+        There are often misconceptions about how the rules engine works and what
+        can be done to optimize rule performance. Today, I wanted to highlight a
+        few key concepts about how rules are processed behind the scenes.
+    </p>
+
+    <h3>The Role of Exclusivity Groups in Rules Processing</h3>
+    <p>
+        Exclusivity groups are widely used in Slate to organize the logic of a
+        complicated process. Rather than repeating filters across multiple
+        rules, you can group rules together with a priority order. If a record
+        matches the top rule, the actions of any subsequent rules are not
+        applied, even if the record also matches their filters.
+    </p>
+    <p>
+        When you picture this running for individual records, you can see the
+        advantage. In the simple simulation below, try out making updates to
+        people's major fields and staff assigned locked fields, then running the
+        rules for one record at a time:
+    </p>
+
+    <section class="full-bleed">
+        <ExclusivityDemo client:only="svelte" />
+    </section>
+
+    <p>
+        A lot of Slate users have something like the example above as their
+        mental model for how the rules are processed. And that's correct--when
+        it comes to the logic.
+    </p><p>
+        The problem with this way of visualizing rules is that the rules are
+        processed in batch. Rather than individual records being run one by one
+        through the process above, Slate determines which records are a match
+        for each rule, based on the filter criteria, then which actions need to
+        be applied to which subsets.
+    </p>
+    <h3>Batch Processing and the Update Queue</h3>
+
+    <p>
+        What does that mean in practice? One of the key ideas here is that the
+        queries for all of the active rules in your instance need to run every
+        time the rules are processed. Placing a complicated or slow-running rule
+        at the end of an exclusivity group doesn't remove the need for that
+        query to be run: there could be records in the batch that would fall
+        through the higher priority rules and be caught by that complicated
+        query, so Slate still needs to know the results of that query. In order
+        for Slate to know the results, it needs to run the query.
+    </p>
+    <p>
+        It's also important to keep in mind that the rules only run on records
+        that are updated. Whenever a record is created or updated in Slate, it's
+        entered into a queue, which means that Slate keeps track of the fact
+        that that record is awaiting processing because there was a change.
+    </p><p>
+        If there wasn't a change to the record, then (in theory) there shouldn't
+        be a reason for the rules to run. Of course, when a rule itself is
+        updated, that could mean that there are records that should now qualify
+        for that rule action because they meet the new filter criteria, but they
+        haven't been updated recently. This is where it's necessary either to
+        update those records or to run a retroactive refresh, which is a way of
+        forcing records into the update queue.
+    </p>
+    <p>
+        Give that a try in this version of the rule simulator, where the rules
+        only run in batch, rather than individually. You can either update a
+        record, which adds it to the queue, or you can click the retro refresh
+        button to add all the records to the queue at once:
+    </p>
+
+    <section class="full-bleed">
+        <UpdateQueue client:only="svelte" />
+    </section>
+
+    <p>
+        Notice that the matching row count for each of the rule queries includes
+        all the records that meet the criteria, regardless of whether they have
+        been updated or caught by a higher priority rule. The last rule in the
+        exclusivity group here is a catch-all rule that sets a default user as
+        the staff assigned when none of the higher priority rules have matched.
+        That rule doesn't have any filters on it, so everyone qualifies. But the
+        only records who are assigned to that default staff member are records
+        that 1) have been updated and 2) not caught by a higher priority rule in
+        the same group.
+    </p>
+    <p>
+        The dropdowns above are editable, so you can see the effects of changing
+        which majors the rule is filtering for and which staff member is
+        assigned. However, even if there's a change to the rule, it's not
+        applied to a record until that record is updated or retro refreshed.
+    </p>
+    <p>
+        In that version, you also have to manually click the 'Run Batch Update'
+        button. Of course, Slate is checking for updates automatically and
+        runnings rules a regular cadence, usually once every 15-20 minutes.
+    </p>
+    <h3>Database Processing</h3>
+
+    <p>
+        In the final version below, this regular check is simulated by showing
+        "My Database" waiting in a queue of databases to be processed. Each
+        database gets its turn, and has a set amount of time for its rule
+        queries to run and for its rule actions to be applied (sped up here for
+        illustration--more details about the actual timeouts can be found in the
+        Technolutions Knowledge Base article <a
+            href="https://knowledge.technolutions.net/docs/rules-overview"
+            >Rules Overview</a
+        >)
+    </p>
+    <p>
+        The overall timeout limit (the red progress bar) keeps the process
+        moving for the rest of the databases. But, if your database happens to
+        have a rule query that times out, or has actions that take too long to
+        apply, that means any pending changes are reverted (the rules either
+        fully complete or fully fail, they never partially complete) and your
+        database goes to the back of the line to wait for its turn to try again:
+    </p>
+    <section class="full-bleed">
+        <FullQueue client:only="svelte" />
+    </section>
+
+    <p>
+        If you want to simulate the effects of a timeout/backup, you can toggle
+        on the filter for "Ping URL LIKE '%xyz.edu%'" in the second rule above.
+        The next time 'My Database' is picked up for processing, the query stage
+        will take too long, resulting in the process failing. Records that are
+        in the update queue will remain there until the filter is disabled
+        again, allowing the queries to run within the limit (this version also
+        shows how records that were updated on the first pass stay in the queue
+        for a second pass).
+    </p>
+    <p>
+        When you're experiencing backlogged rules, reviewing the rule log for
+        any rule GUIDs, the check rules tool, or the database activity monitor
+        can help point to rules that require remediation. The KB article on <a
+            href="https://knowledge.technolutions.net/docs/troubleshooting-rule-backups"
+            >troubleshooting rules</a
+        > goes into more detail about what to change, but by visualizing the rules
+        processing like the simulation above, you should have a clearer understanding
+        of why you need to make those changes and what the result will be.
+    </p>
+    <p>
+        <em>
+            If you're finding this series on Mental Models of Slate useful but
+            you're looking for additional training or live working sessions over
+            Zoom on Configurable Joins, reach out to
+            <a href="mailto:info@predicatehighered.com"
+                >info@predicatehighered.com</a
+            > to discuss whether we might be a good fit. Rule optimization is also
+            a core component of a <a href="/#services"
+                >Configurable Joins Optimization Audit</a
+            >.</em
+        >
+    </p>
+</ArticleLayout>
+
+<style>
+    .full-bleed {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 1rem;
+    }
+</style>
